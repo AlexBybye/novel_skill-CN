@@ -1,0 +1,4 @@
+interface:
+  display_name: "长篇小说协作"
+  short_description: "按需读取资料，共创情节与人物，管理伏笔；内置小说表达审阅，保持作者声音与连续性"
+  default_prompt: "请使用 $novel-coauthor-zh 分析当前小说下一步可以怎么发展，结合有关人物状态和伏笔，先讨论，不写正文。"

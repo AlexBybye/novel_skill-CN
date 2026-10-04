@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "title": "演示作品",
+  "handoff": "handoff.md",
+  "catalog_roots": ["cards"],
+  "style": "style.md"
+}
