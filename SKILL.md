@@ -3,7 +3,7 @@ name: novel-coauthor-zh
 description: 中文长篇小说协作：按需检索本地资料，共同讨论情节、推演人物、管理伏笔，按授权写作并维护连续性。内置小说 humanizer，审阅或润色旁白、对白与内心，保留作者声音和叙事意图；讨论不自动授权正文创作。
 license: MIT
 metadata:
-  version: "1.5.5"
+  version: "1.6.0"
   humanizer-upstream-alignment: "blader/humanizer 3.1.0"
 ---
 
@@ -20,6 +20,7 @@ metadata:
 | 下一步写什么、我想加这个情节 | 判断目的、承接、代价及与现有线索的关系，给少量有区别的方案；不写正文 | [讨论与人物](references/collaboration.md) |
 | 某人会怎样做、塑造人物、建立人物档案 | 用人物底层卡解释动机与代价，用场景卡落实选择；分别保存个人档案 | [人物设计](references/character-design.md)、[两层模板](references/character-templates.md) |
 | 人物缺少吸引力、寻找性格组合 | 从所需阅读体验选择和改造设计，不套固定人设 | [十种组合](references/character-patterns.md) |
+| 配角工具化、对白像信息交换、场景只有视觉、支线缺少牵连 | 先查私人诉求是否进入选择和后果，再处理对白、体感及跨线承接；不批量添加怪癖 | [让人物活在场景里](references/lived-scenes.md) |
 | 多角色agent、关键对手戏推演 | 按授权和工具条件选用有限角色推演，主笔统一成文 | [角色推演](references/role-workshop.md) |
 | 伏笔、连续性、改动影响 | 回查有关线索与证据；已埋、计划、回收要分开 | [记忆管理](references/memory.md) |
 | 按刚才商定的写、写这一场 | 检查情节已授权，再执行场景；用户同一条消息批准并要求写即可，无须重复确认 | [讨论与人物](references/collaboration.md)、[文风](references/style.md) |
