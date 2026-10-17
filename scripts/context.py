@@ -40,6 +40,11 @@ def read_config(root: Path) -> dict:
             local_path(root, config[key])
     for folder in config.get('catalog_roots', []):
         local_path(root, folder)
+    examples = config.get('prose_exemplars', [])
+    if not isinstance(examples, list) or not all(isinstance(p, str) for p in examples):
+        raise ContextError('prose_exemplars 必须为工作区内相对文件路径数组。')
+    for relative in examples:
+        local_path(root, relative)
     return config
 
 
@@ -171,6 +176,8 @@ def tokens(query: str) -> set[str]:
 
 
 def eligible(block: Block, mode: str, chapter: int | None, handoff: str) -> bool:
+    if block.meta.get('kind') == 'exemplar':
+        return False  # Expression references never enter a story-fact packet.
     if block.path == handoff:
         return True  # Operational context, never evidence of character knowledge.
     when = block.meta.get('chapter')
@@ -288,6 +295,119 @@ def build_packet(root: Path, config: dict, *, mode='discuss', query='', ids=None
     return packet
 
 
+def usable_exemplar(block: Block) -> bool:
+    """Metadata is admission evidence, not semantic proof of anonymization/quality."""
+    meta = block.meta
+    if (meta.get('kind') != 'exemplar' or
+            not str(meta.get('id', '')).startswith('EX-') or not meta.get('sources')):
+        return False
+    if meta.get('origin') == 'synthetic':
+        return (block.path == '@skill/references/prose-exemplars.md' and
+                meta.get('status') == 'illustrative')
+    return (meta.get('origin') == 'private' and
+            meta.get('status') in ('approved', 'accepted') and
+            meta.get('usage') == 'expression-only' and meta.get('sanitized') is True and
+            isinstance(meta.get('approval'), str) and bool(meta['approval'].strip()))
+
+
+def build_exemplar_packet(root: Path, config: dict, *, query='', ids=None, select=None,
+                          budget=4000, limit=2, bundled=True) -> str:
+    """Reuse topic parsing, lexical scoring and selectors, isolated from story retrieval."""
+    if budget < 1500:
+        raise ContextError('范例预算至少 1500 字符；不截断范例的适用边界。')
+    if type(limit) is not int or not 1 <= limit <= 3:
+        raise ContextError('每次范例数量须为 1—3 组。')
+    blocks, registered = [], set()
+    for relative in config.get('prose_exemplars', []):
+        path = local_path(root, relative)
+        if not path.is_file():
+            raise ContextError(f'范例文件不存在: {relative}')
+        registered.add(path.relative_to(root).as_posix())
+        blocks.extend(parse_file(root, path))
+    skill_root = Path(__file__).resolve().parents[1]
+    bundled_label = '@skill/references/prose-exemplars.md'
+    if bundled:
+        public = parse_file(skill_root, skill_root / 'references/prose-exemplars.md')
+        for block in public:
+            block.path = '@skill/' + block.path
+        blocks.extend(public)
+        registered.add(bundled_label)
+    selectors = []
+    for value in select or []:
+        path, heading = split_selector(value)
+        if not path.startswith('@skill/'):
+            path = local_path(root, path).relative_to(root).as_posix()
+        if path not in registered:
+            raise ContextError(f'只可选择已配置的私有范例或内置范例: {path}')
+        selectors.append((path, heading))
+    wanted = set(ids or [])
+    required, optional = [], []
+    found_ids, found_selectors, admitted = set(), set(), set()
+    rejected = 0
+    for block in blocks:
+        direct = block.ids.intersection(wanted)
+        matches = {i for i, (p, h) in enumerate(selectors)
+                   if block.path == p and (h is None or block.heading == h)}
+        if not usable_exemplar(block):
+            if direct or (matches and block.meta.get('kind') == 'exemplar'):
+                raise ContextError(f'指定范例未认可、未隔离作品事实或缺少来源: {block.key}')
+            rejected += block.meta.get('kind') == 'exemplar'
+            continue
+        example_id = block.meta['id']
+        if example_id in admitted:
+            raise ContextError(f'范例 ID 重复，请给私有组使用独立 ID: {example_id}')
+        admitted.add(example_id)
+        found_ids.update(direct)
+        found_selectors.update(matches)
+        if direct or matches:
+            required.append(block)
+        else:
+            relevance = score(block, query, set(), 'style')
+            if relevance:
+                optional.append((relevance, block))
+    if wanted - found_ids:
+        raise ContextError('没有可用的范例 ID: ' + ', '.join(sorted(wanted - found_ids)))
+    if len(found_selectors) != len(selectors):
+        raise ContextError('指定的完整范例主题不存在或不可用。')
+    if len(required) > limit:
+        raise ContextError('显式选择的范例超过数量上限，请缩小 --ids/--select 范围。')
+    # At equal relevance, an approved work-specific reference precedes a public illustration.
+    optional.sort(key=lambda pair: (-pair[0], pair[1].path.startswith('@skill/'),
+                                    pair[1].path, pair[1].start))
+    candidates = [block for _, block in optional]
+    header = ('# 表达参考包（独立于剧情事实）\n'
+              '只迁移写法机制；人物、事件、物品、关系和来源章号均不成为当前剧情或角色知识。\n'
+              'source_chapter/chapter 在此仅标示范例出处，不表示当前人物状态生效。\n'
+              '内置 illustrative 只是原创示意，未获作者认可，也没有效果验证。\n')
+
+    def render(chosen, omitted):
+        rendered = []
+        for block in chosen:
+            provenance = {key: block.meta[key] for key in
+                          ('id', 'origin', 'usage', 'sanitized', 'source_chapter', 'approval', 'sources')
+                          if key in block.meta}
+            rendered.append(block.render() + '范例记录（仅表达参考）: ' +
+                            json.dumps(provenance, ensure_ascii=False) + '\n')
+        return (header + ''.join(rendered) +
+                f'\n选入 {len(chosen)} 组；相关但数量/预算未纳入 {len(omitted)} 组；'
+                f'未认可或未隔离的范例排除 {rejected} 组。\n'
+                '无相关可用范例时直接按当前人物与文风写，不补造认可或强套示例。\n')
+
+    if len(render(required, candidates)) > budget:
+        raise ContextError('指定完整范例超过预算，未截断；缩小选择或增加范例独立预算。')
+    chosen, omitted = list(required), []
+    for i, block in enumerate(candidates):
+        pending = omitted + candidates[i + 1:]
+        if len(chosen) < limit and len(render(chosen + [block], pending)) <= budget:
+            chosen.append(block)
+        else:
+            omitted.append(block)
+    packet = render(chosen, omitted)
+    if len(packet) > budget:
+        raise ContextError('范例包元数据超过预算，未截断。')
+    return packet
+
+
 def save_cache(root: Path, relative: str, text: str) -> Path:
     path = local_path(root, relative)
     cache = local_path(root, '.novel-cache')
@@ -314,6 +434,14 @@ def main() -> int:
             command.add_argument('--at-chapter', type=int)
             command.add_argument('--brief')
             command.add_argument('--output', help='Optional path under .novel-cache/')
+    examples = sub.add_parser('exemplars', help='独立选取少量表达范例，不加载剧情资料')
+    examples.add_argument('--root', required=True)
+    examples.add_argument('--query', default='')
+    examples.add_argument('--ids', nargs='*', default=[])
+    examples.add_argument('--select', action='append', default=[])
+    examples.add_argument('--budget', type=int, default=4000)
+    examples.add_argument('--limit', type=int, default=2)
+    examples.add_argument('--output', help='Optional path under .novel-cache/')
     args = parser.parse_args()
     try:
         root = Path(args.root).resolve(strict=True)
@@ -327,9 +455,14 @@ def main() -> int:
                               json.dumps({'version': 1, 'blocks': entries}, ensure_ascii=False, indent=2))
             print(f'已索引 {len(entries)} 个主题簇；索引不含正文。{path}')
         else:
-            packet = build_packet(root, config, mode=args.mode, query=args.query, ids=args.ids,
-                                  include=args.include, select=args.select, budget=args.budget,
-                                  at_chapter=args.at_chapter, brief=args.brief)
+            if args.command == 'exemplars':
+                packet = build_exemplar_packet(root, config, query=args.query, ids=args.ids,
+                                               select=args.select, budget=args.budget,
+                                               limit=args.limit)
+            else:
+                packet = build_packet(root, config, mode=args.mode, query=args.query, ids=args.ids,
+                                      include=args.include, select=args.select, budget=args.budget,
+                                      at_chapter=args.at_chapter, brief=args.brief)
             if args.output:
                 path = save_cache(root, args.output, packet)
                 print(f'已生成 {len(packet)} 字符资料包（上限 {args.budget}），请读取：{path}')
