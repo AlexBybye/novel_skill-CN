@@ -15,6 +15,7 @@ ID = re.compile(r'(?<![A-Za-z0-9])(?:P|E|F|R|W|O|N|Q)\d{2,}(?:-[A-Z0-9]+)?(?![A-
 TABLE_ID = re.compile(r'^\|\s*((?:P|E|F|R|W|O|N|Q)\d{2,})\s*\|', re.M)
 MODES = ('discuss', 'next', 'character', 'clues', 'draft', 'review', 'style')
 TEMPORAL = {'character', 'event', 'clue', 'state', 'delta', 'snapshot', 'prose'}
+CATALOG_ARCHIVES = {'.git', '.novel-cache', '__pycache__', '备份', '修订备份', '草稿记录'}
 
 
 class ContextError(ValueError):
@@ -40,6 +41,11 @@ def read_config(root: Path) -> dict:
             local_path(root, config[key])
     for folder in config.get('catalog_roots', []):
         local_path(root, folder)
+    exclusions = config.get('catalog_exclude', [])
+    if not isinstance(exclusions, list) or not all(isinstance(p, str) for p in exclusions):
+        raise ContextError('catalog_exclude 必须为工作区内相对文件或目录路径数组。')
+    for relative in exclusions:
+        local_path(root, relative)
     examples = config.get('prose_exemplars', [])
     if not isinstance(examples, list) or not all(isinstance(p, str) for p in examples):
         raise ContextError('prose_exemplars 必须为工作区内相对文件路径数组。')
@@ -48,8 +54,27 @@ def read_config(root: Path) -> dict:
     return config
 
 
+def metadata_matches(text: str) -> list[re.Match]:
+    """Ignore literal metadata in fenced examples; keep source offsets intact."""
+    matches = []
+    fence = None
+    offset = 0
+    for line in text.splitlines(keepends=True):
+        marker = re.match(r'\s*(`{3,}|~{3,})', line)
+        if marker:
+            mark = marker.group(1)
+            if fence is None:
+                fence = (mark[0], len(mark))
+            elif mark[0] == fence[0] and len(mark) >= fence[1]:
+                fence = None
+        elif fence is None:
+            matches.extend(META.finditer(text, offset, offset + len(line)))
+        offset += len(line)
+    return matches
+
+
 def metadata(text: str) -> dict:
-    matches = list(META.finditer(text))
+    matches = metadata_matches(text)
     if not matches:
         return {}
     if len(matches) > 1:
@@ -108,12 +133,15 @@ def parse_file(root: Path, path: Path) -> list[Block]:
     lines = text.splitlines(keepends=True)
     relative = path.relative_to(root).as_posix()
     sha = hashlib.sha256(raw).hexdigest()
-    # Keep the complete topic under an H2, including all H3s and paragraphs.
+    # H1 starts a new document scope inside rich, historically prepended cards.
+    # H2 keeps a complete topic, including its H3s and all qualifications.
     starts = [0]
     fence = None
+    outside = []
     for i, line in enumerate(lines):
         stripped = line.lstrip()
         f = re.match(r'(`{3,}|~{3,})', stripped)
+        outside.append(fence is None and not f)
         if f:
             mark = f.group()
             if fence is None:
@@ -121,21 +149,72 @@ def parse_file(root: Path, path: Path) -> list[Block]:
             elif mark[0] == fence[0] and len(mark) >= fence[1]:
                 fence = None
             continue
-        if fence is None and i and re.match(r'^##\s+', line):
-            starts.append(i)
+        if fence is None and i and re.match(r'^#{1,2}\s+', line):
+            start = i
+            # Old cards also put the root metadata directly BEFORE their H1.
+            # Attach it to that heading, without stealing a prior heading's
+            # immediately following declaration from an otherwise empty topic.
+            previous = i - 1
+            while previous >= 0 and not lines[previous].strip():
+                previous -= 1
+            if previous >= 0 and outside[previous] and META.fullmatch(lines[previous].strip()):
+                before = previous - 1
+                while before >= 0 and not lines[before].strip():
+                    before -= 1
+                if before < 0 or not re.match(r'^#{1,2}\s+', lines[before]):
+                    following = i + 1
+                    while following < len(lines) and not lines[following].strip():
+                        following += 1
+                    has_own = (following < len(lines)
+                               and META.fullmatch(lines[following].strip()))
+                    if line.startswith('## ') and has_own:
+                        # Legacy rich cards may insert a file declaration
+                        # between dated sections, with no separate H1 title.
+                        # Keep that declaration separate from the next topic.
+                        if previous not in starts:
+                            starts.append(previous)
+                    else:
+                        start = previous
+            if start not in starts:
+                starts.append(start)
     starts.append(len(lines))
-    intro = ''.join(lines[:starts[1]])
     base = default_meta(relative)
-    base.update(metadata(intro))
+    first_heading = next((i for i, line in enumerate(lines)
+                          if outside[i] and re.match(r'^#{1,2}\s+', line)), len(lines))
+    if first_heading:
+        try:
+            base.update(metadata(''.join(lines[:first_heading])))
+        except (ContextError, json.JSONDecodeError) as exc:
+            raise ContextError(f'{relative}:1: {exc}') from exc
+    active = dict(base)
     blocks = []
     for index, (start, stop) in enumerate(zip(starts, starts[1:])):
         body = ''.join(lines[start:stop])
         if not body.strip():
             continue
-        meta = dict(base)
-        if index:
-            meta.update(metadata(body))
-        clean = META.sub('', body).strip()
+        try:
+            own = metadata(body)
+        except (ContextError, json.JSONDecodeError) as exc:
+            raise ContextError(f'{relative}:{start + 1}: {exc}') from exc
+        matches = metadata_matches(body)
+        clean = body
+        for match in reversed(matches):
+            clean = clean[:match.start()] + clean[match.end():]
+        clean = clean.strip()
+        if not clean:
+            active = dict(base)
+            active.update(own)
+            continue
+        heading = next((line for line in clean.splitlines()
+                        if re.match(r'^#{1,2}\s+', line)), '')
+        if heading.startswith('# '):
+            active = dict(base)
+            active.update(own)
+        elif not heading and index == 0:
+            base.update(own)
+            active = dict(base)
+        meta = dict(active)
+        meta.update(own)
         head = next((re.sub(r'^#+\s*', '', s).strip() for s in clean.splitlines()
                      if s.startswith('#')), Path(relative).stem)
         declared = set(TABLE_ID.findall(clean))
@@ -147,6 +226,7 @@ def parse_file(root: Path, path: Path) -> list[Block]:
 
 def collect(root: Path, config: dict, extra: list[str] | None = None) -> list[Block]:
     paths = set()
+    exclusions = [local_path(root, p) for p in config.get('catalog_exclude', [])]
     for folder in config.get('catalog_roots', []):
         target = local_path(root, folder)
         if target.is_file():
@@ -154,6 +234,9 @@ def collect(root: Path, config: dict, extra: list[str] | None = None) -> list[Bl
         elif target.is_dir():
             for path in target.rglob('*.md'):
                 checked = local_path(root, path.relative_to(root).as_posix())
+                if (CATALOG_ARCHIVES.intersection(path.relative_to(root).parts)
+                        or any(checked == p or checked.is_relative_to(p) for p in exclusions)):
+                    continue
                 paths.add(checked)
     for relative in [config['handoff'], config.get('style'), *(extra or [])]:
         if relative:

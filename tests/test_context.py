@@ -134,6 +134,75 @@ class ContextTests(unittest.TestCase):
         self.assertEqual(len(selected), 2)
         self.assertIn('真实限制', selected[1].text)
 
+    def test_prepended_phase_does_not_become_root_metadata(self):
+        self.write('cards/mixed.md', '## 后期阶段\n'
+                   '<!-- novel-meta: {"kind":"state","status":"candidate","chapter":20} -->\n'
+                   'FUTURE_PHASE_ONLY\n\n'
+                   '<!-- novel-meta: {"id":"P001","kind":"character","status":"approved","chapter":1} -->\n'
+                   '# 人物档案\n\n## 早期知识\nCURRENT_PROFILE_ONLY\n')
+        packet = self.build(mode='review', query='PROFILE', at_chapter=2)
+        self.assertIn('CURRENT_PROFILE_ONLY', packet)
+        self.assertNotIn('FUTURE_PHASE_ONLY', packet)
+
+    def test_each_h1_starts_its_own_metadata_scope(self):
+        self.write('cards/scopes.md', '# 早期档案\n'
+                   '<!-- novel-meta: {"kind":"character","status":"accepted","chapter":2} -->\n'
+                   '## 当前\nEARLY_SCOPE_ONLY\n'
+                   '# 后期档案\n'
+                   '<!-- novel-meta: {"kind":"character","status":"accepted","chapter":9} -->\n'
+                   '## 后期\nLATE_SCOPE_ONLY\n')
+        packet = self.build(mode='review', query='SCOPE', at_chapter=3)
+        self.assertIn('EARLY_SCOPE_ONLY', packet)
+        self.assertNotIn('LATE_SCOPE_ONLY', packet)
+
+    def test_legacy_standalone_scope_does_not_overwrite_next_topic(self):
+        self.write('cards/legacy.md', '## 后期\n'
+                   '<!-- novel-meta: {"kind":"state","status":"candidate","chapter":20} -->\n'
+                   'LATER_ONLY\n\n'
+                   '<!-- novel-meta: {"id":"P001","kind":"character","status":"mixed"} -->\n\n'
+                   '## 早期\n'
+                   '<!-- novel-meta: {"kind":"state","status":"accepted","chapter":2} -->\n'
+                   'EARLY_ONLY\n')
+        packet = self.build(mode='review', query='ONLY', at_chapter=3)
+        self.assertIn('EARLY_ONLY', packet)
+        self.assertNotIn('LATER_ONLY', packet)
+
+    def test_fenced_metadata_is_literal_and_kept_in_evidence(self):
+        self.record('cards/literal.md', '# 记录\n\n## 使用说明\n'
+                    '```markdown\n<!-- novel-meta: {"chapter":999} -->\n'
+                    '# 示例标题\n```\n说明的适用条件。',
+                    kind='rules', status='canonical')
+        packet = self.build(mode='review', select=['cards/literal.md#使用说明'], at_chapter=2)
+        self.assertIn('"chapter":999', packet)
+        self.assertIn('说明的适用条件', packet)
+
+    def test_conflicting_declarations_in_one_topic_are_not_silently_merged(self):
+        self.write('cards/conflict.md', '# 档案\n\n## 同一主题\n'
+                   '<!-- novel-meta: {"status":"accepted","chapter":1} -->\n第一种说法\n'
+                   '<!-- novel-meta: {"status":"candidate","chapter":9} -->\n另一种说法\n')
+        with self.assertRaisesRegex(context.ContextError, r'cards/conflict.md:3:.*一条'):
+            self.build(query='说法')
+
+    def test_file_preamble_applies_to_h2_topics_without_h1(self):
+        self.record('cards/preamble.md', '## 第一主题\nFIRST_TOPIC\n## 第二主题\nSECOND_TOPIC',
+                    kind='rules', status='canonical')
+        packet = self.build(mode='review', select=['cards/preamble.md#第二主题'], at_chapter=1)
+        self.assertIn('SECOND_TOPIC', packet)
+
+    def test_nested_backups_are_excluded_but_explicit_history_can_be_read(self):
+        self.record('cards/备份/old.md', '# 旧资料\nARCHIVED_RECORD',
+                    kind='rules', status='canonical')
+        self.assertNotIn('ARCHIVED_RECORD', self.build(query='ARCHIVED'))
+        self.assertIn('ARCHIVED_RECORD', self.build(include=['cards/备份/old.md']))
+
+    def test_configured_exclusions_do_not_change_explicit_time_filter(self):
+        self.config['catalog_exclude'] = ['cards/old']
+        self.record('cards/old/future.md', '# 未来\nEXCLUDED_FUTURE',
+                    kind='state', status='accepted', chapter=9)
+        self.assertNotIn('EXCLUDED_FUTURE', self.build(query='EXCLUDED'))
+        with self.assertRaisesRegex(context.ContextError, '时点/状态不兼容'):
+            self.build(mode='review', at_chapter=2, include=['cards/old/future.md'])
+
 
 if __name__ == '__main__':
     unittest.main()
