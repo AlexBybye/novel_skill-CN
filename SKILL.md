@@ -13,6 +13,8 @@ metadata:
 
 ## 开始与范围
 
+当作者明确要求**只改人物对话的人类化、自然化**，尤其是“其他结构、人物、伏笔工作已完成”的全书专项时，直接执行 [对白专项 Skill](references/dialogue-only/SKILL.md)，以最新正文作为事实依据，**不要根据对旧章节的记忆预设修改清单**。本轮不启用其余结构性重写、人物合并、剧情回收等权限。
+
 有作品目录时，先读`novel-workspace.json`与其指定接续卡；有`session_entry`则执行接续要求。按当前主题取人物、阶段状态、设定与原文，不默认重读README、全部共识和历史。独立片段沿用户给定范围处理，不强造工作区。取上下文、检索失败与资料冲突按[记忆管理](references/memory.md)。
 
 沿用最新作者决定和实际稿，区分已定规则、已批准未来、未终审工作稿、已接受正文、候选和否决方案。未来计划不倒灌成已发生或角色已知；换对话不把已定情节降回待批准。只讨论、诊断或更新skill时不试改章节；已授权的修稿无需逐句再问。
@@ -24,6 +26,7 @@ metadata:
 | 讨论后续、完善作者方向 | [情节共创](references/collaboration.md)；比较前提、选择与后果，不自动写正文 | [阅读动力](references/narrative-drive.md) |
 | 人物设计、人物会怎样行动 | [人物设计](references/character-design.md)，读取个人卡及当前关系、知情 | [人物模板](references/character-templates.md)、[设计组合](references/character-patterns.md)；已授权委派才用[角色推演](references/role-workshop.md) |
 | 已授权写作、整章重写 | [章节执行与两遍审查](references/event-progression.md)、[文风入口](references/style.md)及作品当前风格档；含连续对白同时读[对白入口](references/dialogue.md)和场内个人卡 | 有具体文字困难再读对应的详细小节 |
+| **全书、仅人物对白自然化/人类化（其余专项已完成）** | **优先读取 [对白专项 Skill](references/dialogue-only/SKILL.md) 与 [作者认可样本校准](references/dialogue-only/references/editorial-calibration.md)**，再按需读取原有对白细则；其权限边界优先于普通全章重写入口 | [作者样本校准](references/dialogue-only/references/editorial-calibration.md)、[对白问题诊断](references/dialogue-only/references/diagnostics.md)、[批次流程](references/dialogue-only/references/batch-protocol.md) |
 | 全章或全书精修对白 | [全章场景精修](references/scene-revision.md)、[对白入口](references/dialogue.md)与[文风入口](references/style.md)；结合场内个人卡，将台词、动作、神态、心理、手边事情和环境一起处理 | [批次执行](references/revision-batches.md)用于连续多章；句间难点才选具体案例 |
 | 多章节奏雷同、重复流程、多线迟迟不收束 | [跨章叙事](references/narrative-variation.md)，以完整章群判断重复体验与阶段兑现 | [批次执行](references/revision-batches.md)，不以单句润色冒充结构已修 |
 | 转场断裂、章尾与下一场接不上 | [转场与承接](references/transitions.md)，核对当前时空、未完的事和状态怎样延续 | 生活与体感问题读[人物在场](references/lived-scenes.md) |
