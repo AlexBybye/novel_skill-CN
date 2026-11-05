@@ -1,7 +1,7 @@
 
 <div align="center">
 
-当前版本 **2.0.0**。围绕作者当前作品讨论情节、推演人物、写作与全章精修，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
+当前版本 **2.0.1**。围绕作者当前作品讨论情节、推演人物、写作与全章精修，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
 # novel_skill-CN
 
 **中文长篇小说协作 · 内置小说 humanizer**
@@ -10,7 +10,7 @@
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square)](#本地检索)
 ![中文](https://img.shields.io/badge/写作语言-中文-9B4444?style=flat-square)
 
-[开始使用](#开始使用) · [运行机制](#运行机制) · [小说 humanizer](#小说-humanizer) · [来源和借鉴](#来源和借鉴)
+[使用](#使用) · [文件怎样分工](#文件怎样分工) · [小说 humanizer](references/novel-humanizer.md) · [来源和借鉴](#来源和借鉴)
 
 </div>
 
@@ -59,6 +59,10 @@ tests/                          检索与包检查测试，以及未执行的文
 
 现有模块入口和常用标题锚点保持稳定，作品内引用无需迁移。入口说明当前怎样做，细则解释困难怎样辨认，案例用于理解可迁移机制；不要求每场全文读取，更不要求每次固定取若干正反例。人物和作品档案保留在作品里，不复制进技能发布包。
 
+## 2.0.1精修保护
+
+精修先比较具体收益与原文作用，允许完整读后保留；保护有意义的重复和情绪递进，具体措辞仍可修整。L0—L3只记处理规模，不表示授权或完成等级。风格收益不清时撤回相应改动，保留已验证的事实修复；发现机械化先停止扩批，复核受影响单元后按已有授权继续。具体见[场景精修](references/scene-revision.md#修改收益与原文保护)与[批次执行](references/revision-batches.md#撤回改动与停止机械化)。作品专属事实继续由作品档案维护，不从经验总结直接导入技能。
+
 ## 2.0.0执行重点
 
 全章精修先完整读章，再按整场交流处理话语、行为、心理和环境。私人争执、调查质问、危险协作分别修；编辑在幕后核查，不把核查要求写成人物的反复确认。不靠每句配喝水、抬眼或摆衣角修补机械对白，也不把真正的闲聊和陪伴概述掉。
@@ -88,7 +92,7 @@ python <skill>/scripts/context.py exemplars --root <作品目录> --query "手�
 ```text
 python -m unittest discover -s tests -p "test_*.py"
 python scripts/check_package.py
-python scripts/check_package.py --archive ../novel-coauthor-zh-2.0.0.zip
+python scripts/check_package.py --archive ../novel-coauthor-zh-2.0.1.zip
 ```
 
 包检查验证UTF-8、包内路径与标题锚点，并可生成逐文件核对的ZIP；排除Git、缓存与编译产物，不安装软件。脚本测试使用合成夹具验证检索边界、元数据作用域、版本化文件引用及包内容，不验证文笔。`tests/behavior-cases.md`与`tests/prose-benchmark.md`是行为情境与文学效果评测方案，未执行独立模型评测时不能写成已经有效。宿主临时目录不可写时，将`TMP`/`TEMP`或Python的临时目录指向有权限的测试目录后运行，不修改小说作为测试。
