@@ -1,7 +1,7 @@
 
 <div align="center">
 
-当前版本 **2.1.0**。围绕作者当前作品讨论情节、推演人物、写作与全章精修，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
+当前版本 **2.2.0**。围绕作者当前作品讨论情节、推演人物、写作与全章精修，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
 # novel_skill-CN
 
 **中文长篇小说协作 · 内置小说 humanizer**
@@ -22,6 +22,7 @@
 
 - “讨论下一段人物会怎样选择，先不写正文。”
 - “按已定情节写这一章，保留人物知情和关系阶段。”
+- “用[一稿一修的两次指令](examples/one-draft-one-revision.md)先写好人物心理与交流，再做一次场景级精修。”
 - “全章精修这段对白，连同动作、神态、心理和环境一起读、一起处理。”
 - “检查这组章节是否重复核验、流程压过人物，以及支线有没有阶段性收束。”
 
@@ -42,6 +43,8 @@ references/
   character-*.md                 人物设计、模板及可选设计组合
   narrative-*.md                 阅读动力、跨章结构与支线收束
   emotional-immersion.md         情感牵引、人物内心、当日外观和世界沉浸（当前优先）
+  six-dimension-quality.md       六维质量合同：从首稿到审读的具体失败信号与保护标准
+  two-pass-workflow.md           一稿一修：首稿整体成文、一次场景级精修与终验
   lived-scenes.md                私人诉求、生活与体感
   novel-humanizer.md             忠实表达审阅
   memory.md                      资料状态、接续、失效与归档
@@ -59,6 +62,12 @@ tests/                          检索与包检查测试，以及未执行的文
 ```
 
 现有模块入口和常用标题锚点保持稳定，作品内引用无需迁移。入口说明当前怎样做，细则解释困难怎样辨认，案例用于理解可迁移机制；不要求每场全文读取，更不要求每次固定取若干正反例。人物和作品档案保留在作品里，不复制进技能发布包。
+
+## 2.2.0 六维一体与一稿一修（新增）
+
+在2.1.0“情感牵引与沉浸感优先”的基础上，新增[六维质量标准](references/six-dimension-quality.md)与[一稿一修工作流](references/two-pass-workflow.md)。六维包括**持续心理、对白生命力、情感钩子、人物形象、场景沉浸、章群节奏与事实因果**，贯通写前、首稿、一次场景精修、两遍终验；旧对白专项的窄范围权限不变。
+
+这里的“两轮”是减少后续机械返工的工作设计，不是承诺小说两遍必然达到高质量。程序只能验文件结构，写作效果仍需要真实读者和作者验证。
 
 ## 2.1.0 情感牵引与沉浸感优先（替代旧冲突）
 
@@ -99,7 +108,7 @@ python <skill>/scripts/context.py exemplars --root <作品目录> --query "手�
 ```text
 python -m unittest discover -s tests -p "test_*.py"
 python scripts/check_package.py
-python scripts/check_package.py --archive ../novel-coauthor-zh-2.1.0.zip
+python scripts/check_package.py --archive ../novel-coauthor-zh-2.2.0.zip
 ```
 
 包检查验证UTF-8、包内路径与标题锚点，并可生成逐文件核对的ZIP；排除Git、缓存与编译产物，不安装软件。脚本测试使用合成夹具验证检索边界、元数据作用域、版本化文件引用及包内容，不验证文笔。`tests/behavior-cases.md`与`tests/prose-benchmark.md`是行为情境与文学效果评测方案，未执行独立模型评测时不能写成已经有效。宿主临时目录不可写时，将`TMP`/`TEMP`或Python的临时目录指向有权限的测试目录后运行，不修改小说作为测试。

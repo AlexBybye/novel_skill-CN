@@ -3,13 +3,15 @@ name: novel-coauthor-zh
 description: 中文长篇小说协作：讨论情节、设计人物、按授权写作与全章精修，管理伏笔、跨章节奏和连续性。对白连同动作、心理与环境一起处理；讨论或只更新技能不授权改写正文。
 license: MIT
 metadata:
-  version: "2.1.0"
+  version: "2.2.0"
   humanizer-upstream-alignment: "blader/humanizer 3.1.0"
 ---
 
 # 中文长篇协作
 
 **当前首要创作导向（覆盖旧的过度克制习惯）：** 小说必须让读者**关心人物、进入人物内心、看得见人物当下的模样、想象得出人物所处世界**。旧规则若鼓励一律留白、只用动作暗示、回避心理直述、减少衣着或环境描写，导致正文扁平、缺少追读动力，以[情感牵引与沉浸感](references/emotional-immersion.md)为准替代。真实有用的含蓄、角色秘密、原稿风格和设定边界照常保留。**优先级：作者当前明确要求与已确认事实 > 本模块的阅读体验纠偏 > 一般风格偏好与历史抽样习惯；任务授权范围仍独立有效。**
+
+**六维共同验收：** 从初写到精修都要同时考虑[六维质量标准](references/six-dimension-quality.md)中的心理持续叙事、对白生命力、情感钩子、人物形象、环境沉浸、章群节奏与设定因果。不要用某章有心理独白、没有官腔或几句景物来宣告整章达标。已授权写作/精修优先沿[一稿一修工作流](references/two-pass-workflow.md)在第一轮就完成场景体验，第二轮只修实际损失；两轮是工作目标，不是文学质量保证。仅讨论或仅改Skill时不自动动小说。
 
 作者决定重大情节，助手承担场景、人物与文字执行。按实际任务读取下面对应入口；入口给执行方法，`references/details/`给细化辨认，案例与工具单独按需取用，不因保存了全部经验便每场加载全部文件。
 
@@ -27,11 +29,11 @@ metadata:
 |---|---|---|
 | 讨论后续、完善作者方向 | [情节共创](references/collaboration.md)；比较前提、选择与后果，不自动写正文 | [阅读动力](references/narrative-drive.md) |
 | 人物设计、人物会怎样行动 | [人物设计](references/character-design.md)，读取个人卡及当前关系、知情 | [人物模板](references/character-templates.md)、[设计组合](references/character-patterns.md)；已授权委派才用[角色推演](references/role-workshop.md) |
-| 已授权写作、整章重写 | [章节执行与两遍审查](references/event-progression.md)、[文风入口](references/style.md)及作品当前风格档；含连续对白同时读[对白入口](references/dialogue.md)和场内个人卡 | 有具体文字困难再读对应的详细小节 |
+| **已授权写作、整章重写（优先一稿一修）** | **[一稿一修工作流](references/two-pass-workflow.md)**、[六维质量标准](references/six-dimension-quality.md)、[章节执行与两遍审查](references/event-progression.md)及作品当前文风档；含连续对白按需读[对白入口](references/dialogue.md) | 有具体文字困难再读对应详细小节，不全量加载案例 |
 | **全书、仅人物对白自然化/人类化（其余专项已完成）** | **优先读取 [对白专项 Skill](references/dialogue-only/SKILL.md) 与 [作者认可样本校准](references/dialogue-only/references/editorial-calibration.md)**，再按需读取原有对白细则；其权限边界优先于普通全章重写入口 | [作者样本校准](references/dialogue-only/references/editorial-calibration.md)、[对白问题诊断](references/dialogue-only/references/diagnostics.md)、[批次流程](references/dialogue-only/references/batch-protocol.md) |
-| 全章或全书精修对白 | [全章场景精修](references/scene-revision.md)、[情感牵引与沉浸感](references/emotional-immersion.md)、[对白入口](references/dialogue.md)与[文风入口](references/style.md)；结合场内个人卡，将台词、动作、神态、心理、手边事情和环境一起处理 | [批次执行](references/revision-batches.md)用于连续多章；句间难点才选具体案例 |
+| 全章或全书**综合精修**（含对白） | [一稿一修工作流](references/two-pass-workflow.md)、[六维质量标准](references/six-dimension-quality.md)、[全章场景精修](references/scene-revision.md)、[对白入口](references/dialogue.md)；结合场内个人卡处理心理、台词、动作、环境 | [批次执行](references/revision-batches.md)用于连续多章；局部表达难点再读对应细则 |
 | **读者觉得扁平、不想追读，人物缺心理/外貌/衣着/环境** | **[情感牵引与沉浸感](references/emotional-immersion.md)**，先据正文定位具体阅读损失；不按固定字数加描写 | [阅读动力](references/narrative-drive.md)、[人物在场](references/lived-scenes.md)、[首次登场](references/character-templates.md#首次直接登场建立人物形象) |
-| **全书沉浸感与情感钩子审读（可分批）** | **[情感牵引与沉浸感](references/emotional-immersion.md)**与[批次执行](references/revision-batches.md)，证据驱动地分批全章连读；诊断未授权改写正文 | [跨章叙事](references/narrative-variation.md)与[全章场景精修](references/scene-revision.md) |
+| **全书六维综合审读（可分批）** | **[六维质量标准](references/six-dimension-quality.md)**、[情感牵引与沉浸感](references/emotional-immersion.md)与[批次执行](references/revision-batches.md)，证据驱动地分批全章连读；诊断不授权改写正文 | [跨章叙事](references/narrative-variation.md)与[全章场景精修](references/scene-revision.md) |
 | 多章节奏雷同、重复流程、多线迟迟不收束 | [跨章叙事](references/narrative-variation.md)，以完整章群判断重复体验与阶段兑现 | [批次执行](references/revision-batches.md)，不以单句润色冒充结构已修 |
 | 转场断裂、章尾与下一场接不上 | [转场与承接](references/transitions.md)，核对当前时空、未完的事和状态怎样延续 | 生活与体感问题读[人物在场](references/lived-scenes.md) |
 | 润色、表达审阅、文风校准 | [小说humanizer](references/novel-humanizer.md)或[文风入口](references/style.md)，按作者契约处理 | 只读当前问题对应细则；不为去模板而统一换文风 |
@@ -54,7 +56,7 @@ metadata:
 
 ## 审查、修订与交付
 
-每章先查因果、时序、设定、能力、知情、物品与伏笔，再另读完整交流、人物内心、形象与环境是否可感；执行[两遍审查](references/event-progression.md#交付前分两次审查)，第一次通过不能抵消第二次问题。连续章另复核交界和重复模式，不另堆一套形式表。全章任务不能只读引号、局部diff或检索命中便报完成。针对“扁平、不想读”还需检查人物心思是否可进入、人物当下形象是否可见、场景是否立得住，以及读者是否形成具体的牵挂；不以字数、描写频次自证质量。
+每章先查因果、时序、设定、能力、知情、物品与伏笔，再另读完整交流、人物内心、形象与环境是否可感，并核对情感钩子与跨章重复；执行[六维质量标准](references/six-dimension-quality.md)与[两遍审查](references/event-progression.md#交付前分两次审查)，第一次通过不能抵消第二次问题。连续章另复核交界和重复模式，不另堆一套形式表。全章任务不能只读引号、局部diff或检索命中便报完成。针对“扁平、不想读”还需检查人物心思是否可进入、人物当下形象是否可见、场景是否立得住，以及读者是否形成具体的牵挂；不以字数、描写频次自证质量。
 
 大批次按[批次执行](references/revision-batches.md)记录实际覆盖、当前版本、问题处置与待办；旧稿或旧标准的“已修”不能用于跳章。程序只验证文件、版本和检索，不证明人物自然或文学效果；未执行的独立评测照实标明。
 
