@@ -1,7 +1,7 @@
 
 <div align="center">
 
-当前版本 **2.3.0**。围绕作者当前作品讨论情节、推演人物、写作、全章精修与六维文学验收，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
+当前版本 **2.3.1**。围绕作者当前作品讨论情节、推演人物、写作、全章精修与六维文学验收，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
 # novel_skill-CN
 
 **中文长篇小说协作 · 内置小说 humanizer**
@@ -63,6 +63,10 @@ tests/                          检索与包检查测试，以及未执行的文
 
 现有模块入口和常用标题锚点保持稳定，作品内引用无需迁移。入口说明当前怎样做，细则解释困难怎样辨认，案例用于理解可迁移机制；不要求每场全文读取，更不要求每次固定取若干正反例。人物和作品档案保留在作品里，不复制进技能发布包。
 
+## 2.3.1 核心创作原则
+
+在[主入口](SKILL.md)明确写前的两个判断。依据大纲、设定、人物卡和最新剧情，推演人物此刻会做什么，以及读者愿意看到什么。把两者落实到可信的选择、场面和后果中。
+
 ## 2.3.0 六维终验与修复性重写
 
 全章深修逐场判断成熟保留、局部修补或整场重写，改后复读全章和必要的邻章，发现问题继续返工。多版本回修按作者裁定核对作者基线、当前底稿与历轮意见，并记录实际读审、改稿和复验范围。正式分批与交付物按本轮约定执行。见[全章场景精修](references/scene-revision.md)与[批次执行](references/revision-batches.md)。
@@ -112,7 +116,7 @@ python <skill>/scripts/context.py exemplars --root <作品目录> --query "手�
 ```text
 python -m unittest discover -s tests -p "test_*.py"
 python scripts/check_package.py
-python scripts/check_package.py --archive ../novel-coauthor-zh-2.3.0.zip
+python scripts/check_package.py --archive ../novel-coauthor-zh-2.3.1.zip
 ```
 
 包检查验证UTF-8、包内路径与标题锚点，并可生成逐文件核对的ZIP；排除Git、缓存与编译产物，不安装软件。脚本测试使用合成夹具验证检索边界、元数据作用域、版本化文件引用及包内容，不验证文笔。`tests/behavior-cases.md`与`tests/prose-benchmark.md`是行为情境与文学效果评测方案，未执行独立模型评测时不能写成已经有效。宿主临时目录不可写时，将`TMP`/`TEMP`或Python的临时目录指向有权限的测试目录后运行，不修改小说作为测试。
