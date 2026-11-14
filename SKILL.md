@@ -1,9 +1,9 @@
 ---
 name: novel-coauthor-zh
-description: 中文长篇小说协作：讨论情节、设计人物、按授权写作与全章精修，管理伏笔、跨章节奏和连续性。对白连同动作、心理与环境一起处理；讨论或只更新技能不授权改写正文。
+description: 中文长篇小说协作：讨论情节、设计人物、按授权写作、全章精修与六维文学验收，管理伏笔、跨章节奏和连续性。对白连同动作、心理与环境一起处理。仅讨论、诊断或更新技能时不改正文。
 license: MIT
 metadata:
-  version: "2.2.0"
+  version: "2.3.0"
   humanizer-upstream-alignment: "blader/humanizer 3.1.0"
 ---
 
@@ -11,7 +11,7 @@ metadata:
 
 **当前首要创作导向（覆盖旧的过度克制习惯）：** 小说必须让读者**关心人物、进入人物内心、看得见人物当下的模样、想象得出人物所处世界**。旧规则若鼓励一律留白、只用动作暗示、回避心理直述、减少衣着或环境描写，导致正文扁平、缺少追读动力，以[情感牵引与沉浸感](references/emotional-immersion.md)为准替代。真实有用的含蓄、角色秘密、原稿风格和设定边界照常保留。**优先级：作者当前明确要求与已确认事实 > 本模块的阅读体验纠偏 > 一般风格偏好与历史抽样习惯；任务授权范围仍独立有效。**
 
-**六维共同验收：** 从初写到精修都要同时考虑[六维质量标准](references/six-dimension-quality.md)中的心理持续叙事、对白生命力、情感钩子、人物形象、环境沉浸、章群节奏与设定因果。不要用某章有心理独白、没有官腔或几句景物来宣告整章达标。已授权写作/精修优先沿[一稿一修工作流](references/two-pass-workflow.md)在第一轮就完成场景体验，第二轮只修实际损失；两轮是工作目标，不是文学质量保证。仅讨论或仅改Skill时不自动动小说。
+**六维共同验收**涵盖[六维质量标准](references/six-dimension-quality.md)中的心理持续叙事、对白生命力、情感钩子、人物形象、环境沉浸、章群节奏与设定因果。[一稿一修工作流](references/two-pass-workflow.md)用于从首稿建立场景体验。全章深修须完整读章，逐场判断保留、局修或重写，改后按全文与必要邻章复验并返工。
 
 作者决定重大情节，助手承担场景、人物与文字执行。按实际任务读取下面对应入口；入口给执行方法，`references/details/`给细化辨认，案例与工具单独按需取用，不因保存了全部经验便每场加载全部文件。
 
@@ -34,6 +34,7 @@ metadata:
 | 全章或全书**综合精修**（含对白） | [一稿一修工作流](references/two-pass-workflow.md)、[六维质量标准](references/six-dimension-quality.md)、[全章场景精修](references/scene-revision.md)、[对白入口](references/dialogue.md)；结合场内个人卡处理心理、台词、动作、环境 | [批次执行](references/revision-batches.md)用于连续多章；局部表达难点再读对应细则 |
 | **读者觉得扁平、不想追读，人物缺心理/外貌/衣着/环境** | **[情感牵引与沉浸感](references/emotional-immersion.md)**，先据正文定位具体阅读损失；不按固定字数加描写 | [阅读动力](references/narrative-drive.md)、[人物在场](references/lived-scenes.md)、[首次登场](references/character-templates.md#首次直接登场建立人物形象) |
 | **全书六维综合审读（可分批）** | **[六维质量标准](references/six-dimension-quality.md)**、[情感牵引与沉浸感](references/emotional-immersion.md)与[批次执行](references/revision-batches.md)，证据驱动地分批全章连读；诊断不授权改写正文 | [跨章叙事](references/narrative-variation.md)与[全章场景精修](references/scene-revision.md) |
+| **已授权六维终验与修复性重写** | [批次执行](references/revision-batches.md)确定版本与范围，按[全章场景精修](references/scene-revision.md)实际修复并依[六维质量标准](references/six-dimension-quality.md)连读验收 | 多版本时对照作者基线、累计稿与旧意见。待修或待复验据实记录 |
 | 多章节奏雷同、重复流程、多线迟迟不收束 | [跨章叙事](references/narrative-variation.md)，以完整章群判断重复体验与阶段兑现 | [批次执行](references/revision-batches.md)，不以单句润色冒充结构已修 |
 | 转场断裂、章尾与下一场接不上 | [转场与承接](references/transitions.md)，核对当前时空、未完的事和状态怎样延续 | 生活与体感问题读[人物在场](references/lived-scenes.md) |
 | 润色、表达审阅、文风校准 | [小说humanizer](references/novel-humanizer.md)或[文风入口](references/style.md)，按作者契约处理 | 只读当前问题对应细则；不为去模板而统一换文风 |
