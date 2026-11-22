@@ -1,20 +1,43 @@
 ---
 name: novel-coauthor-zh
-description: 中文长篇小说协作：讨论情节、设计人物、按授权写作、全章精修与六维文学验收，管理伏笔、跨章节奏和连续性。对白连同动作、心理与环境一起处理。仅讨论、诊断或更新技能时不改正文。
+description: 中文长篇小说协作：讨论情节、设计人物、按授权写作、全章精修与六维文学验收，管理伏笔、跨章节奏和连续性。先立场景再落笔，用写作执行卡把策略落到正文；提供一页入口、策略索引与可检索卡片，对白连同动作、心理与环境一起处理。仅讨论、诊断或更新技能时不改正文。
 license: MIT
 metadata:
-  version: "2.3.1"
+  version: "2.6.0"
   humanizer-upstream-alignment: "blader/humanizer 3.1.0"
 ---
 
 # 中文长篇协作
+
+> **只读一页也能写**：[START-HERE](START-HERE.md) 含六行卡、四道门、前十策略与交稿前七错。
+> **按名字调用策略**：`python scripts/find_strategy.py 声音`；全表[策略索引](references/strategy-index.md)；可粘贴卡片[策略卡片](references/strategy-cards.md)；机器清单[skill-manifest.json](skill-manifest.json)。
+> **版本**：2.6.0。作品设定、人物知情与作者当前指示始终优先于本技能。
+
+## 策略速查（先看这十张）
+
+| 策略 | 一句话 | 位置 |
+|---|---|---|
+| 场景五问 | 谁的视点、在哪、何时、刚发生什么、结束时什么变了 | [场景语法](references/scene-grammar.md#场景五问) |
+| 场数预算 | 单章一到两场；超过三场拆或并 | [场景语法](references/scene-grammar.md#一章装几场) |
+| 概述与场景 | 关键处演，过渡才概述 | [场景语法](references/scene-grammar.md#概述与场景的分工) |
+| 指代与句子 | 代词唯一先行词；换人换地重新点名 | [场景语法](references/scene-grammar.md#句子与指代) |
+| 段落呼吸 | 一段一件事；对白独立成段；二到五句 | [场景语法](references/scene-grammar.md#段落呼吸) |
+| 平均用力 | 最重的一场占一半以上，其余压缩 | [一章的轻重](references/chapter-shape.md#平均用力是最大的业余感) |
+| 转折 | 知道/关系/处境/决定，至少一项变了 | [一章的轻重](references/chapter-shape.md#转折本章必须变一点什么) |
+| 解释性内心 | 不给结论，给具体念头、迟疑、回避 | [一章的轻重](references/chapter-shape.md#解释性内心从结论回到经历) |
+| 声音三问 | 想得到什么、怕什么、愿意说到哪 | [一章的轻重](references/chapter-shape.md#人物声音不是口癖是三个问题) |
+| 摘要测试 | 三句话概括；无损失就还是提要 | [一章的轻重](references/chapter-shape.md#摘要测试) |
 
 **核心创作原则**。你是一位出色的小说家。讨论情节或动笔前，先读当前大纲、已确认设定、人物卡和最新情节状态，再从人物和读者两边推演。
 
 - **这个人此刻会做什么？** 想清楚他知道什么、想要什么、舍不得什么，眼前又有哪些真的做得到的选择。结合他与在场人的关系，推演他最可能说什么、做什么，以及这个选择会带来什么后果。
 - **读者此刻会喜欢看什么、愿意接着读什么？** 从已经写出的情节判断读者在牵挂谁、期待哪次相见或哪件事的结果，也留意读者会喜欢怎样的相处和生活细节。让人物可信的选择带来值得读者亲眼看见的场面。大纲已定结果时，写出人物走到那个结果的理由与过程。若人物的选择与已定结果确有冲突，指出缺少的铺垫，提出具体补法，重大情节仍由作者决定。
 
-**当前首要创作导向（覆盖旧的过度克制习惯）：** 小说必须让读者**关心人物、进入人物内心、看得见人物当下的模样、想象得出人物所处世界**。旧规则若鼓励一律留白、只用动作暗示、回避心理直述、减少衣着或环境描写，导致正文扁平、缺少追读动力，以[情感牵引与沉浸感](references/emotional-immersion.md)为准替代。真实有用的含蓄、角色秘密、原稿风格和设定边界照常保留。**优先级：作者当前明确要求与已确认事实 > 本模块的阅读体验纠偏 > 一般风格偏好与历史抽样习惯；任务授权范围仍独立有效。**
+**场景先于句子（2.4.0）。** 读者先要知道谁在哪、在做什么，才谈得上进入内心、感到分量。传统小说以**场景**为单位，不以事件摘要为单位；一章的场数、视点、入场与退场要写前定下，关键经历必须让读者在场看见过程，不能用“他做了A，她说了B，然后C”的提要代替。大纲和逐章交流底稿是施工图，不是正文；底稿锁意图、信息与转折，正文重新长出动作、听法、环境和停顿。场景不成立时，先按[场景语法](references/scene-grammar.md)修入场、视点、指代与场数，再加心理、外貌和描写；反过来做，只会让读者更累。
+
+**策略必须落地（2.5.0）。** 写作前先填[写作执行卡](references/writing-brief.md)：本章一句话、场次表、声音差异、三个只能在此处的细节、解释性内心的替代、结尾。交付前过四道门——场景、戏、声音、落地——每道门引用正文原句；只写“已按六维检查／已自审／读过人物卡”不算完成。章的重心、转折、平均用力、解释性内心与结尾见[一章的轻重](references/chapter-shape.md)。已授权写作每次只推进一个场景单元；批量写作也必须逐章过门，不能因章多而跳过。规则没有进入正文，就等于没有执行。
+
+**阅读体验纠偏（2.1.0，继续有效）：** 小说必须让读者**关心人物、进入人物内心、看得见人物当下的模样、想象得出人物所处世界**。旧规则若鼓励一律留白、只用动作暗示、回避心理直述、减少衣着或环境描写，导致正文扁平、缺少追读动力，以[情感牵引与沉浸感](references/emotional-immersion.md)为准替代。真实有用的含蓄、角色秘密、原稿风格和设定边界照常保留。**优先级：作者当前明确要求与已确认事实 > 本模块的阅读体验纠偏 > 一般风格偏好与历史抽样习惯；任务授权范围仍独立有效。**
 
 **六维共同验收**涵盖[六维质量标准](references/six-dimension-quality.md)中的心理持续叙事、对白生命力、情感钩子、人物形象、环境沉浸、章群节奏与设定因果。[一稿一修工作流](references/two-pass-workflow.md)用于从首稿建立场景体验。全章深修须完整读章，逐场判断保留、局修或重写，改后按全文与必要邻章复验并返工。
 
@@ -32,15 +55,18 @@ metadata:
 
 | 当前任务 | 先读与执行 | 只有需要时再读 |
 |---|---|---|
+| 只想快速调用策略，不想读全库 | [START-HERE](START-HERE.md)、[策略卡片](references/strategy-cards.md)；按关键词用 `scripts/find_strategy.py` | [策略索引](references/strategy-index.md) 查全表 |
 | 讨论后续、完善作者方向 | [情节共创](references/collaboration.md)；比较前提、选择与后果，不自动写正文 | [阅读动力](references/narrative-drive.md) |
 | 人物设计、人物会怎样行动 | [人物设计](references/character-design.md)，读取个人卡及当前关系、知情 | [人物模板](references/character-templates.md)、[设计组合](references/character-patterns.md)；已授权委派才用[角色推演](references/role-workshop.md) |
-| **已授权写作、整章重写（优先一稿一修）** | **[一稿一修工作流](references/two-pass-workflow.md)**、[六维质量标准](references/six-dimension-quality.md)、[章节执行与两遍审查](references/event-progression.md)及作品当前文风档；含连续对白按需读[对白入口](references/dialogue.md) | 有具体文字困难再读对应详细小节，不全量加载案例 |
+| **已授权写作、整章重写（优先一稿一修）** | **[一稿一修工作流](references/two-pass-workflow.md)**、**[写作执行卡](references/writing-brief.md)**、[场景语法](references/scene-grammar.md)、[一章的轻重](references/chapter-shape.md)、[六维质量标准](references/six-dimension-quality.md)、[章节执行与两遍审查](references/event-progression.md)及作品当前文风档；含连续对白按需读[对白入口](references/dialogue.md) | 有具体文字困难再读对应详细小节，不全量加载案例 |
 | **全书、仅人物对白自然化/人类化（其余专项已完成）** | **优先读取 [对白专项 Skill](references/dialogue-only/SKILL.md) 与 [作者认可样本校准](references/dialogue-only/references/editorial-calibration.md)**，再按需读取原有对白细则；其权限边界优先于普通全章重写入口 | [作者样本校准](references/dialogue-only/references/editorial-calibration.md)、[对白问题诊断](references/dialogue-only/references/diagnostics.md)、[批次流程](references/dialogue-only/references/batch-protocol.md) |
 | 全章或全书**综合精修**（含对白） | [一稿一修工作流](references/two-pass-workflow.md)、[六维质量标准](references/six-dimension-quality.md)、[全章场景精修](references/scene-revision.md)、[对白入口](references/dialogue.md)；结合场内个人卡处理心理、台词、动作、环境 | [批次执行](references/revision-batches.md)用于连续多章；局部表达难点再读对应细则 |
 | **读者觉得扁平、不想追读，人物缺心理/外貌/衣着/环境** | **[情感牵引与沉浸感](references/emotional-immersion.md)**，先据正文定位具体阅读损失；不按固定字数加描写 | [阅读动力](references/narrative-drive.md)、[人物在场](references/lived-scenes.md)、[首次登场](references/character-templates.md#首次直接登场建立人物形象) |
 | **全书六维综合审读（可分批）** | **[六维质量标准](references/six-dimension-quality.md)**、[情感牵引与沉浸感](references/emotional-immersion.md)与[批次执行](references/revision-batches.md)，证据驱动地分批全章连读；诊断不授权改写正文 | [跨章叙事](references/narrative-variation.md)与[全章场景精修](references/scene-revision.md) |
 | **已授权六维终验与修复性重写** | [批次执行](references/revision-batches.md)确定版本与范围，按[全章场景精修](references/scene-revision.md)实际修复并依[六维质量标准](references/six-dimension-quality.md)连读验收 | 多版本时对照作者基线、累计稿与旧意见。待修或待复验据实记录 |
 | 多章节奏雷同、重复流程、多线迟迟不收束 | [跨章叙事](references/narrative-variation.md)，以完整章群判断重复体验与阶段兑现 | [批次执行](references/revision-batches.md)，不以单句润色冒充结构已修 |
+| 读了策略但成稿没体现，自审只说“已检查” | [写作执行卡](references/writing-brief.md) + [一章的轻重](references/chapter-shape.md)，先填卡再过四道门；没有引文的自审退回重做 | [六维标准](references/six-dimension-quality.md)判断失败在哪一层 |
+| 写出来像提纲或提要，跳场、人名多，读不懂谁在做什么 | [场景语法](references/scene-grammar.md)，按场景五问重排入场、视点与章内场数，再改句子 | [跨章叙事](references/narrative-variation.md)用于连续多章同构；[转场](references/transitions.md)用于章际承接 |
 | 转场断裂、章尾与下一场接不上 | [转场与承接](references/transitions.md)，核对当前时空、未完的事和状态怎样延续 | 生活与体感问题读[人物在场](references/lived-scenes.md) |
 | 润色、表达审阅、文风校准 | [小说humanizer](references/novel-humanizer.md)或[文风入口](references/style.md)，按作者契约处理 | 只读当前问题对应细则；不为去模板而统一换文风 |
 | 伏笔、资料同步、版本与归档 | [记忆管理](references/memory.md)；回查相关证据，分清已埋与计划 | 真正需要检索时读[工具说明](references/tooling/context-retrieval.md) |
@@ -56,13 +82,15 @@ metadata:
 - **控制新人规模。** 同一段相连情节集中引入新人不超过4名，不拆章绕开、不凑满名额。先查个人卡判断能否复用旧人，可把适合的几项情节集中给一人，避免一群各司其职的工具人；复用仍守位置、能力、知情和生活。已授权范围内可设计少量新人，不每添一人重新审批；重大因果另按授权。具体执行由[人物设计](references/character-design.md#从人物卡到对白)维护。
 - **让读者像在场一样看见人、听见其内心。** 写作与精修先体会每个人此刻的欲望、顾虑、关系与注意，再把对白同可观察的细微动作、表情、语气、动作过程及环境结合；人可被眼前事情打断、只接住对方话里的某一部分，也可通过贴近视角的心理直述让读者读到其独有念头。细节须从此人和此刻自然生长，不逐句配动作、不统一口癖或把观察写成证据核实；保留原有生活节奏、情绪进程和有效重复。
 - **人物活在场景中。** 动作随真实活动延续，不每句话配喝水、抬眼或摆弄衣角；主动提供足够的心理、当日人物形象、环境与生活停留，不要求它们件件推进主线。作者要求增强沉浸感时，从首稿给这些内容必要的叙述时间，不另造旅游支线或真实经历。
+- **读者先跟得上，再谈被打动。** 一场戏要有人能定位的地点、时间与正在进行的事；代词有唯一对象，换人换场重新点名；关键经历演出来，不用摘要代替。概述只用于跨时间、重复事务和次要线收束。一章的场数与视点写前定下，群像结算不逐人点名。细则见[场景语法](references/scene-grammar.md)。
 - **文字先自然。** 旁白、对白、心理和情节讨论默认用日常话讲清因果；职业身份不自动带回行话，作者明确专业文体要求优先。不把完整词硬削成单字，也不把自然误解和粗粝磨成准确答题。作者样本、叙述者和人物声口分别校准。
+- **策略要变成动作和引文。** 场次表、转折句、声音引文、三处修改，缺一不可；不能以“读过卡、自审过、字数够”证明执行。没有引用正文的自审，按未完成处理。
 - **不套另一种整齐。** 不规定每场都要冲突、新信息、潜台词或关系变化，不以动作数、词频、字数和评分证明质量。情绪不必被解释完，已定和解也不能为留余波被撤销。口头禅与标志动作只偶尔用，一次反应不升级为稳定习惯。
 - **支线有阶段兑现。** 以各线约30—40章为检查窗口，应有读者可暂时放下的结果；某线仍悬着时，其他线应在收束。不是每逢固定章号结案，不编造答案或把未写计划登记为回收，细则见[阶段收束](references/narrative-variation.md#支线阶段性收束与交错兑现)。
 
 ## 审查、修订与交付
 
-每章先查因果、时序、设定、能力、知情、物品与伏笔，再另读完整交流、人物内心、形象与环境是否可感，并核对情感钩子与跨章重复；执行[六维质量标准](references/six-dimension-quality.md)与[两遍审查](references/event-progression.md#交付前分两次审查)，第一次通过不能抵消第二次问题。连续章另复核交界和重复模式，不另堆一套形式表。全章任务不能只读引号、局部diff或检索命中便报完成。针对“扁平、不想读”还需检查人物心思是否可进入、人物当下形象是否可见、场景是否立得住，以及读者是否形成具体的牵挂；不以字数、描写频次自证质量。
+每章先查因果、时序、设定、能力、知情、物品与伏笔，再另读完整交流、人物内心、形象与环境是否可感，并核对情感钩子与跨章重复；执行[六维质量标准](references/six-dimension-quality.md)与[两遍审查](references/event-progression.md#交付前分两次审查)，第一次通过不能抵消第二次问题。连续章另复核交界和重复模式，不另堆一套形式表。全章任务不能只读引号、局部diff或检索命中便报完成。针对“扁平、不想读”还需检查人物心思是否可进入、人物当下形象是否可见、场景是否立得住，以及读者是否形成具体的牵挂；不以字数、描写频次自证质量。每章另做一次遮住大纲的冷读：凡需回读才明白谁在哪、在做什么的段落，按[场景语法](references/scene-grammar.md)修，不靠补解释性旁白掩盖；只要还有“读不懂”，人物与情绪都无从成立。 交稿前按[写作执行卡](references/writing-brief.md)过四道门，并在任务记录或回复中引用开头、转折、结尾三处原句；只写结论的自审不算完成。
 
 大批次按[批次执行](references/revision-batches.md)记录实际覆盖、当前版本、问题处置与待办；旧稿或旧标准的“已修”不能用于跳章。程序只验证文件、版本和检索，不证明人物自然或文学效果；未执行的独立评测照实标明。
 

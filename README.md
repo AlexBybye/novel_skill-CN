@@ -1,7 +1,7 @@
 
 <div align="center">
 
-当前版本 **2.3.1**。围绕作者当前作品讨论情节、推演人物、写作、全章精修与六维文学验收，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
+当前版本 **2.6.0**。围绕作者当前作品讨论情节、推演人物、写作、全章精修与六维文学验收，保留作者声音、人物知情及长篇连续性。讨论、候选、未终审工作稿和已接受正文分别管理。
 # novel_skill-CN
 
 **中文长篇小说协作 · 内置小说 humanizer**
@@ -37,6 +37,11 @@ references/
   scene-revision.md              全章场景精修与三类对话
   revision-batches.md            连续章节、版本与问题处置
   event-progression.md           章节执行及先后两遍审查
+  scene-grammar.md               场景语法：场数、视点、入场退场、指代与冷读
+  writing-brief.md               写作执行卡：写前六行、写后四道门、引用原句的自审
+  chapter-shape.md               一章的轻重：主问题、转折、平均用力、声音与结尾
+  strategy-index.md              全策略索引：按任务找，不从头读
+  strategy-cards.md              可粘贴的策略卡片：一页一张
   dialogue.md                    对白执行入口与七项审查
   style.md                       文风执行入口
   transitions.md                 转场、状态与章尾承接
@@ -56,12 +61,47 @@ references/
   role-workshop.md                获授权后的有限角色推演
 scripts/
   context.py                     本地主题检索，不调用模型
+  find_strategy.py               按关键词查策略，输出一句话与位置
   check_package.py               文件、链接、锚点与ZIP检查
 examples/minimal/                新工作区的最小配置示例
 tests/                          检索与包检查测试，以及未执行的文学行为评测方案
 ```
 
 现有模块入口和常用标题锚点保持稳定，作品内引用无需迁移。入口说明当前怎样做，细则解释困难怎样辨认，案例用于理解可迁移机制；不要求每场全文读取，更不要求每次固定取若干正反例。人物和作品档案保留在作品里，不复制进技能发布包。
+
+## 2.6.0 快速调用层：一页入口、策略索引、可检索卡片
+
+作者指出：即使 skill 里有策略，写作时也常看不到它们被调用；最新 skill 必须能被 agent 方便读取，每个主要策略要能快速调用，而不是埋在几十个文件里。
+
+本版不增加新的写作理论，只增加“找得到、调得动”的一层：
+
+- [START-HERE.md](START-HERE.md)：一页协议。只读一个文件也能写：六行卡、四道门、前十策略、交稿前七错、版本与证据规则。
+- [策略索引](references/strategy-index.md)：按“写前 / 写作中 / 交稿前 / 对白 / 修订与长篇”分组，每条给一句话、何时用、位置。
+- [策略卡片](references/strategy-cards.md)：十五张可直接粘贴的卡片（场景五问、四道门、平均用力、解释性内心、声音三问、摘要测试等）。
+- [skill-manifest.json](skill-manifest.json)：机器可读清单，含 id、别名、一句话、文件与标题锚点。
+- `scripts/find_strategy.py`：`python scripts/find_strategy.py 声音` 直接返回一句话、何时用、文件#锚点；`--check` 校验全部锚点，`--json` 供程序读取。
+- [SKILL.md](SKILL.md) 顶部增加“策略速查（先看这十张）”，即使只加载主入口也能看到核心策略。
+
+这层的验收标准不是“文档写全了”，而是：一个 agent 只读一页或运行一条命令，能否在十秒内找到并调用正确策略。
+
+## 2.5.0 策略必须落地：执行卡与四道门
+
+作者指出，skill 里已有的策略在成稿中看不到实际应用，自审也常只写“已按六维检查”。本版不再增加文学理论，而是把策略变成写前必须做的决定与交稿前必须留下的证据：
+
+- 新增[写作执行卡](references/writing-brief.md)：本章一句话、场次表、声音差异、三个只能在此处的细节、解释性内心的替代、结尾；写后过四道门（场景、戏、声音、落地），每道门引用正文原句。
+- 新增[一章的轻重](references/chapter-shape.md)：从“一天”到“一场戏”，处理平均用力、主问题、转折、解释性内心、人物声音、开头结尾与职业作家的三问。
+- 主入口、[一稿一修](references/two-pass-workflow.md)与[两遍审查](references/event-progression.md)明确：没有引用原句的自审按未完成处理；批量写作也必须逐章过门。
+- 新增行为测试：自审只有结论没有引文、填卡发现没有转折、一章想装四场、读了策略但成稿没体现。
+
+这不是说新规则一上就能写好；它只保证“没有执行”会在交稿前暴露，而不是被一句“已自审”盖过去。
+
+## 2.4.0 场景先于句子
+
+作者指出后半部正文“像提纲、像摘要、读起来僵硬”，经抽样核对，问题不在句子不够漂亮，而在**场景层**：章内段落数、对白比例大幅下降，平均段落从三十余字涨到百字以上，一章切成四五个迷你场、十几个旧人轮流点名，代词与施事经常找不到对象。读者不是被打动得太少，而是先跟不上“谁在哪、在做什么”。
+
+本版新增[场景语法](references/scene-grammar.md)：场景五问、入场三件事与退场一件事、一场一视点、一章的场数预算、概述与场景的分工、句子与指代、段落呼吸、对白自明、从大纲／交流底稿到正文的转换、结算章不逐人点名、遮住大纲的冷读验收，以及提要体、蒙太奇体、电报体和群像点名的合成反例。它被接入主入口、[一稿一修](references/two-pass-workflow.md)、[两遍审查](references/event-progression.md)、[六维标准](references/six-dimension-quality.md)与[小说 humanizer](references/novel-humanizer.md)，并新增两组[对照范例](references/prose-exemplars.md)（EX-007、EX-008）。
+
+这不会自动改善已写章节。"先加心理、加外貌、加描写"在场景不成立时只会让读者更累；应先修入场、视点、指代与场数。技能更新不等于作者读感已验收，也不授权改写正文。
 
 ## 2.3.1 核心创作原则
 
@@ -116,7 +156,7 @@ python <skill>/scripts/context.py exemplars --root <作品目录> --query "手�
 ```text
 python -m unittest discover -s tests -p "test_*.py"
 python scripts/check_package.py
-python scripts/check_package.py --archive ../novel-coauthor-zh-2.3.1.zip
+python scripts/check_package.py --archive ../novel-coauthor-zh-2.6.0.zip
 ```
 
 包检查验证UTF-8、包内路径与标题锚点，并可生成逐文件核对的ZIP；排除Git、缓存与编译产物，不安装软件。脚本测试使用合成夹具验证检索边界、元数据作用域、版本化文件引用及包内容，不验证文笔。`tests/behavior-cases.md`与`tests/prose-benchmark.md`是行为情境与文学效果评测方案，未执行独立模型评测时不能写成已经有效。宿主临时目录不可写时，将`TMP`/`TEMP`或Python的临时目录指向有权限的测试目录后运行，不修改小说作为测试。

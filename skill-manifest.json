@@ -1,0 +1,353 @@
+{
+  "name": "novel-coauthor-zh",
+  "version": "2.6.0",
+  "updated": "2026-11-23",
+  "entrypoints": {
+    "quickstart": "START-HERE.md",
+    "skill": "SKILL.md",
+    "index": "references/strategy-index.md",
+    "cards": "references/strategy-cards.md"
+  },
+  "read_order": {
+    "write_chapter": ["START-HERE.md", "references/writing-brief.md", "references/chapter-shape.md"],
+    "revise_chapter": ["START-HERE.md", "references/scene-revision.md", "references/writing-brief.md"],
+    "dialogue_only": ["references/dialogue.md", "START-HERE.md"],
+    "diagnose": ["references/strategy-index.md"],
+    "continuity": ["references/memory.md"]
+  },
+  "strategies": [
+    {
+      "id": "scene-five",
+      "name": "场景五问",
+      "aliases": ["五问", "场景", "谁在哪", "视点"],
+      "one_line": "谁的视点、在哪、什么时候、刚发生什么、结束时什么变了。",
+      "when": "写任何一场之前；读者说看不懂谁在做什么。",
+      "file": "references/scene-grammar.md",
+      "anchor": "场景五问"
+    },
+    {
+      "id": "scene-entry",
+      "name": "入场三件事",
+      "aliases": ["入场", "退场", "定位"],
+      "one_line": "定位置、接状态、起动作；退场留下一个具体的未完成。",
+      "when": "场景开头像半句话，或换场后读者不知道在哪。",
+      "file": "references/scene-grammar.md",
+      "anchor": "入场三件事退场一件事"
+    },
+    {
+      "id": "one-pov",
+      "name": "一场一视点",
+      "aliases": ["视点", "POV", "跳视角"],
+      "one_line": "同一场不要跳进另一个人的脑子；换视点等于换场。",
+      "when": "一段里同时写两个人的内心。",
+      "file": "references/scene-grammar.md",
+      "anchor": "一场一视点"
+    },
+    {
+      "id": "scene-budget",
+      "name": "场数预算",
+      "aliases": ["分场", "几场", "蒙太奇", "多线"],
+      "one_line": "单章通常一到两场；超过三场先拆章或合并，次要线压成概述。",
+      "when": "一章想装三条线、四五个分场。",
+      "file": "references/scene-grammar.md",
+      "anchor": "一章装几场"
+    },
+    {
+      "id": "summary-vs-scene",
+      "name": "概述与场景",
+      "aliases": ["提要", "摘要", "概述", "流水账"],
+      "one_line": "关键经历必须演；概述只用于跨时间、重复事务、次要线。",
+      "when": "想把一段压成“他做了A，她说了B”。",
+      "file": "references/scene-grammar.md",
+      "anchor": "概述与场景的分工"
+    },
+    {
+      "id": "pronouns",
+      "name": "指代与句子",
+      "aliases": ["指代", "代词", "主语", "读不懂"],
+      "one_line": "代词要有唯一先行词；换人、换地、隔时间，重新点名。",
+      "when": "读者要回读才知道谁在做什么。",
+      "file": "references/scene-grammar.md",
+      "anchor": "句子与指代"
+    },
+    {
+      "id": "paragraphs",
+      "name": "段落呼吸",
+      "aliases": ["段落", "分段", "百字大段"],
+      "one_line": "一段一件事；对白独立成段；常见段落二到五句。",
+      "when": "一章只有十几个百字大段。",
+      "file": "references/scene-grammar.md",
+      "anchor": "段落呼吸"
+    },
+    {
+      "id": "dialogue-self",
+      "name": "对白自明",
+      "aliases": ["对白指代", "暗语", "那件事"],
+      "one_line": "每句台词所指的人、事、物，必须在本场或前文有着落。",
+      "when": "人物说“那件事”“上次那个”“你答应过的”。",
+      "file": "references/scene-grammar.md",
+      "anchor": "对白要自明"
+    },
+    {
+      "id": "abstract-dialogue",
+      "name": "抽象对话落地",
+      "aliases": ["祂", "神明", "理念", "命题"],
+      "one_line": "给一处可感的场，让质问带上具体诉求，不替作者讲主题。",
+      "when": "与祂、组织、命运或抽象规则对话。",
+      "file": "references/scene-grammar.md",
+      "anchor": "抽象对话也要落地"
+    },
+    {
+      "id": "outline-to-prose",
+      "name": "从底稿到正文",
+      "aliases": ["底稿", "大纲腔", "施工图"],
+      "one_line": "底稿锁意图、信息、转折；正文重新长出血肉、动作、听法。",
+      "when": "按逐章交流底稿写正文。",
+      "file": "references/scene-grammar.md",
+      "anchor": "从大纲底稿到正文"
+    },
+    {
+      "id": "ensemble",
+      "name": "群像结算",
+      "aliases": ["群像", "结算", "点名册", "结局"],
+      "one_line": "选两三个人承担情感重量，其余用有主语的概述带过。",
+      "when": "灾后结算、多线收束、结尾若干章。",
+      "file": "references/scene-grammar.md",
+      "anchor": "结算章与群像收束"
+    },
+    {
+      "id": "cold-read",
+      "name": "冷读",
+      "aliases": ["回读", "读不懂", "验收"],
+      "one_line": "遮住大纲和人物表读一遍，标出所有需要回读的地方。",
+      "when": "交稿前；任何“读不懂”的反馈。",
+      "file": "references/scene-grammar.md",
+      "anchor": "冷读验收"
+    },
+    {
+      "id": "six-line-card",
+      "name": "六行卡",
+      "aliases": ["执行卡", "写前卡", "场次表"],
+      "one_line": "一句话、场次表、声音差异、三个细节、内心替代、结尾。",
+      "when": "每次已授权写作或重写，动笔前。",
+      "file": "references/writing-brief.md",
+      "anchor": "写前六行卡"
+    },
+    {
+      "id": "four-gates",
+      "name": "四道门",
+      "aliases": ["验收", "门", "引文", "自审"],
+      "one_line": "场景、戏、声音、落地；每道门引用正文原句。",
+      "when": "每次交稿前。",
+      "file": "references/writing-brief.md",
+      "anchor": "写后四道门每道门必须引用原句"
+    },
+    {
+      "id": "average-weight",
+      "name": "平均用力",
+      "aliases": ["重心", "轻重", "流水账"],
+      "one_line": "先排节拍，最重的一场给一半以上篇幅，其余压缩。",
+      "when": "一章什么都写了，但什么都不记得。",
+      "file": "references/chapter-shape.md",
+      "anchor": "平均用力是最大的业余感"
+    },
+    {
+      "id": "main-question",
+      "name": "一章一个主问题",
+      "aliases": ["主问题", "欲望", "章纲"],
+      "one_line": "谁想要什么、卡在哪里；一个主问题足够撑一章。",
+      "when": "章纲只有事件、没有欲望。",
+      "file": "references/chapter-shape.md",
+      "anchor": "一章一个主问题"
+    },
+    {
+      "id": "turn",
+      "name": "转折",
+      "aliases": ["变化", "不可逆", "戏"],
+      "one_line": "知道、关系、处境、决定，至少一项要变。",
+      "when": "写完一章，说不出“变了什么”。",
+      "file": "references/chapter-shape.md",
+      "anchor": "转折本章必须变一点什么"
+    },
+    {
+      "id": "explanatory-interior",
+      "name": "解释性内心",
+      "aliases": ["内心讲评", "她明白", "心理总结"],
+      "one_line": "不给结论，给具体念头、迟疑的动作、回避的话。",
+      "when": "出现“她明白/她觉得/她知道/她说不出为什么”。",
+      "file": "references/chapter-shape.md",
+      "anchor": "解释性内心从结论回到经历"
+    },
+    {
+      "id": "voice-three",
+      "name": "声音三问",
+      "aliases": ["声音", "声口", "对白同质", "口癖"],
+      "one_line": "想得到什么、怕对方看出什么、愿意说到哪。",
+      "when": "所有人说话都像同一个细心、克制、讲道理的人。",
+      "file": "references/chapter-shape.md",
+      "anchor": "人物声音不是口癖是三个问题"
+    },
+    {
+      "id": "opening-ending",
+      "name": "开头与结尾",
+      "aliases": ["章尾", "钩子", "结尾", "开头"],
+      "one_line": "开头给一个人、一个地方、一个麻烦；结尾给一个具体的未完成。",
+      "when": "章末总是关灯、收拾、明天再说。",
+      "file": "references/chapter-shape.md",
+      "anchor": "开头与结尾"
+    },
+    {
+      "id": "summary-test",
+      "name": "摘要测试",
+      "aliases": ["三句话", "提要", "概括"],
+      "one_line": "用三句话概括本章；若无损失，正文还是提要。",
+      "when": "怀疑这一章是摘要。",
+      "file": "references/chapter-shape.md",
+      "anchor": "摘要测试"
+    },
+    {
+      "id": "three-questions",
+      "name": "职业作家三问",
+      "aliases": ["读者在等什么", "记得哪一句"],
+      "one_line": "读者在等什么、什么无法用摘要替代、明天记得哪一句。",
+      "when": "写完自检。",
+      "file": "references/chapter-shape.md",
+      "anchor": "职业作家的三问"
+    },
+    {
+      "id": "six-dim",
+      "name": "六维",
+      "aliases": ["六维", "心理", "情感钩子", "沉浸"],
+      "one_line": "心理、对白、钩子、形象、环境、章群；先看读者跟不跟得上。",
+      "when": "判断失败在哪一层。",
+      "file": "references/six-dimension-quality.md",
+      "anchor": "共同底线读者跟得上"
+    },
+    {
+      "id": "two-pass",
+      "name": "两遍审查",
+      "aliases": ["两遍", "事实遍", "体验遍"],
+      "one_line": "先查事实，再另读完整交流与人物行为；不能互相抵消。",
+      "when": "每章交付前。",
+      "file": "references/event-progression.md",
+      "anchor": "交付前分两次审查"
+    },
+    {
+      "id": "self-review-evidence",
+      "name": "自审引文",
+      "aliases": ["引文", "已检查", "自审"],
+      "one_line": "没有引用正文原句的自审按未完成处理。",
+      "when": "自审只有“已检查/已修复/无问题”。",
+      "file": "references/event-progression.md",
+      "anchor": "第二遍对话与人物行为"
+    },
+    {
+      "id": "dialogue-seven",
+      "name": "对白七项验收",
+      "aliases": ["七项", "对白验收", "声口"],
+      "one_line": "声口、接招、关系作用、非动作补丁、不替作者解释、情绪不整齐、事实未改。",
+      "when": "完整对手戏写后。",
+      "file": "references/dialogue.md",
+      "anchor": "第二次审查完整对话与人物行为"
+    },
+    {
+      "id": "mechanical-dialogue",
+      "name": "机械顶嘴与应答",
+      "aliases": ["顶嘴", "抓词", "反问", "应答"],
+      "one_line": "不逐句纠正、认同后回顶、验收正确立场。",
+      "when": "对话像打乒乓。",
+      "file": "references/dialogue.md",
+      "anchor": "机械顶嘴与机械应答"
+    },
+    {
+      "id": "oral-completeness",
+      "name": "口语完整性",
+      "aliases": ["口语", "缩句", "工作摘要"],
+      "one_line": "先恢复必要表达，再谈简洁；自然不等于短。",
+      "when": "台词被压成工作摘要。",
+      "file": "references/dialogue.md",
+      "anchor": "口语完整性与精修优先级"
+    },
+    {
+      "id": "info-layering",
+      "name": "信息分层",
+      "aliases": ["认知路径", "设定讲解", "跳层"],
+      "one_line": "门、世界、能力、派别逐层给，不跳层。",
+      "when": "设定讲解挤在一起。",
+      "file": "references/dialogue.md",
+      "anchor": "信息分层与认知路径"
+    },
+    {
+      "id": "scene-revision",
+      "name": "场景精修",
+      "aliases": ["精修", "全章", "保留", "局修"],
+      "one_line": "逐场判断保留、局修或重写；先完整读，再动笔。",
+      "when": "已授权全章精修。",
+      "file": "references/scene-revision.md",
+      "anchor": "先完整读再决定哪里改"
+    },
+    {
+      "id": "revision-benefit",
+      "name": "修改收益与原文保护",
+      "aliases": ["收益", "原文保护", "撤回"],
+      "one_line": "先说原文作用，再比较改后收益；不证明更好就保留。",
+      "when": "想大改一段时。",
+      "file": "references/scene-revision.md",
+      "anchor": "修改收益与原文保护"
+    },
+    {
+      "id": "three-talks",
+      "name": "三类谈话",
+      "aliases": ["私人争执", "调查质问", "危险协作"],
+      "one_line": "私人争执、调查质问、危险协作分开修。",
+      "when": "对话问题混在一起。",
+      "file": "references/scene-revision.md",
+      "anchor": "三类谈话分别修"
+    },
+    {
+      "id": "transitions",
+      "name": "转场",
+      "aliases": ["承接", "章尾", "下一场"],
+      "one_line": "先判断断在哪里，再选连接；开场重新定位。",
+      "when": "章际或场际接不上。",
+      "file": "references/transitions.md",
+      "anchor": "先判断断在哪里"
+    },
+    {
+      "id": "cross-chapter",
+      "name": "跨章节奏",
+      "aliases": ["多章", "重复", "同构"],
+      "one_line": "以完整章群判断重复体验，不用单章润色冒充结构已修。",
+      "when": "多章像同一套流程。",
+      "file": "references/narrative-variation.md",
+      "anchor": "一先观察一个章节窗口再评判单章"
+    },
+    {
+      "id": "stage-closure",
+      "name": "阶段收束",
+      "aliases": ["支线", "30章", "收束"],
+      "one_line": "约30—40章给读者一个可放下的结果。",
+      "when": "支线长期悬着。",
+      "file": "references/narrative-variation.md",
+      "anchor": "支线阶段性收束与交错兑现"
+    },
+    {
+      "id": "batch",
+      "name": "批次执行",
+      "aliases": ["批次", "版本", "覆盖"],
+      "one_line": "记录实际覆盖、版本、问题处置与待办。",
+      "when": "连续多章修订。",
+      "file": "references/revision-batches.md",
+      "anchor": null
+    },
+    {
+      "id": "humanizer",
+      "name": "小说 humanizer",
+      "aliases": ["润色", "去模板", "表达审阅"],
+      "one_line": "只修有依据的表达问题，保留事实、口吻和有意粗粝。",
+      "when": "润色或表达审阅。",
+      "file": "references/novel-humanizer.md",
+      "anchor": null
+    }
+  ]
+}
