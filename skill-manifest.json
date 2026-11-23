@@ -1,26 +1,29 @@
 {
   "name": "novel-coauthor-zh",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "updated": "2026-11-23",
   "entrypoints": {
     "quickstart": "START-HERE.md",
     "skill": "SKILL.md",
     "index": "references/strategy-index.md",
-    "cards": "references/strategy-cards.md"
+    "cards": "references/strategy-cards.md",
+    "quality": "references/six-dimension-quality.md"
   },
   "read_order": {
-    "write_chapter": ["START-HERE.md", "references/writing-brief.md", "references/chapter-shape.md"],
-    "revise_chapter": ["START-HERE.md", "references/scene-revision.md", "references/writing-brief.md"],
-    "dialogue_only": ["references/dialogue.md", "START-HERE.md"],
-    "diagnose": ["references/strategy-index.md"],
-    "continuity": ["references/memory.md"]
+    "write_chapter": ["START-HERE.md", "references/six-dimension-quality.md", "references/writing-brief.md", "references/chapter-shape.md"],
+    "revise_chapter": ["START-HERE.md", "references/six-dimension-quality.md", "references/scene-revision.md", "references/writing-brief.md"],
+    "dialogue_only": ["references/dialogue-only/SKILL.md"],
+    "diagnose": ["references/six-dimension-quality.md", "references/strategy-index.md"],
+    "continuity": ["references/memory.md"],
+    "revise_batch": ["START-HERE.md", "references/six-dimension-quality.md", "references/revision-batches.md", "references/scene-revision.md"],
+    "review_batch": ["references/six-dimension-quality.md", "references/revision-batches.md"]
   },
   "strategies": [
     {
       "id": "scene-five",
       "name": "场景五问",
       "aliases": ["五问", "场景", "谁在哪", "视点"],
-      "one_line": "谁的视点、在哪、什么时候、刚发生什么、结束时什么变了。",
+      "one_line": "视点、地点、时间、眼下的事，以及这场的变化或生活体验。",
       "when": "写任何一场之前；读者说看不懂谁在做什么。",
       "file": "references/scene-grammar.md",
       "anchor": "场景五问"
@@ -29,7 +32,7 @@
       "id": "scene-entry",
       "name": "入场三件事",
       "aliases": ["入场", "退场", "定位"],
-      "one_line": "定位置、接状态、起动作；退场留下一个具体的未完成。",
+      "one_line": "定位置、接状态、起动作；退场可以留下牵挂，也可以让事情落定。",
       "when": "场景开头像半句话，或换场后读者不知道在哪。",
       "file": "references/scene-grammar.md",
       "anchor": "入场三件事退场一件事"
@@ -47,7 +50,7 @@
       "id": "scene-budget",
       "name": "场数预算",
       "aliases": ["分场", "几场", "蒙太奇", "多线"],
-      "one_line": "单章通常一到两场；超过三场先拆章或合并，次要线压成概述。",
+      "one_line": "多线时检查转场有无挤走人物体验；可概述次要线，章界按授权。",
       "when": "一章想装三条线、四五个分场。",
       "file": "references/scene-grammar.md",
       "anchor": "一章装几场"
@@ -101,7 +104,7 @@
       "id": "outline-to-prose",
       "name": "从底稿到正文",
       "aliases": ["底稿", "大纲腔", "施工图"],
-      "one_line": "底稿锁意图、信息、转折；正文重新长出血肉、动作、听法。",
+      "one_line": "从作者已定事实、边界与结果出发，让人物自己选择怎样交谈。",
       "when": "按逐章交流底稿写正文。",
       "file": "references/scene-grammar.md",
       "anchor": "从大纲底稿到正文"
@@ -128,7 +131,7 @@
       "id": "six-line-card",
       "name": "六行卡",
       "aliases": ["执行卡", "写前卡", "场次表"],
-      "one_line": "一句话、场次表、声音差异、三个细节、内心替代、结尾。",
+      "one_line": "本章重心、场次、声音、现场细节、当下心思与自然结尾。",
       "when": "每次已授权写作或重写，动笔前。",
       "file": "references/writing-brief.md",
       "anchor": "写前六行卡"
@@ -146,7 +149,7 @@
       "id": "average-weight",
       "name": "平均用力",
       "aliases": ["重心", "轻重", "流水账"],
-      "one_line": "先排节拍，最重的一场给一半以上篇幅，其余压缩。",
+      "one_line": "按人物经历与读者注意分配篇幅，给值得停留的一刻足够时间。",
       "when": "一章什么都写了，但什么都不记得。",
       "file": "references/chapter-shape.md",
       "anchor": "平均用力是最大的业余感"
@@ -164,10 +167,10 @@
       "id": "turn",
       "name": "转折",
       "aliases": ["变化", "不可逆", "戏"],
-      "one_line": "知道、关系、处境、决定，至少一项要变。",
+      "one_line": "有转折时写出变化；日常章找出值得亲历的一刻。",
       "when": "写完一章，说不出“变了什么”。",
       "file": "references/chapter-shape.md",
-      "anchor": "转折本章必须变一点什么"
+      "anchor": "转折与日常的重心"
     },
     {
       "id": "explanatory-interior",
@@ -191,7 +194,7 @@
       "id": "opening-ending",
       "name": "开头与结尾",
       "aliases": ["章尾", "钩子", "结尾", "开头"],
-      "one_line": "开头给一个人、一个地方、一个麻烦；结尾给一个具体的未完成。",
+      "one_line": "入场有着落，结尾可留具体牵挂，也可让眼前生活自然落定。",
       "when": "章末总是关灯、收拾、明天再说。",
       "file": "references/chapter-shape.md",
       "anchor": "开头与结尾"
@@ -217,17 +220,17 @@
     {
       "id": "six-dim",
       "name": "六维",
-      "aliases": ["六维", "心理", "情感钩子", "沉浸"],
-      "one_line": "心理、对白、钩子、形象、环境、章群；先看读者跟不跟得上。",
-      "when": "判断失败在哪一层。",
+      "aliases": ["六维", "心理", "情感钩子", "沉浸", "三层六维", "V3.0", "审批标准", "章群三问", "关系归零", "关系循环", "心理持续叙事", "对白生命力", "情感牵挂与追读动力", "人物可视形象", "环境与审美沉浸", "章群节奏与因果", "风景", "审美", "身体连续性"],
+      "one_line": "三层看结构、人物、文学；六维共同验收，章群三问分别取证。",
+      "when": "续写、综合精修与文学验收，动笔或审读前。",
       "file": "references/six-dimension-quality.md",
-      "anchor": "共同底线读者跟得上"
+      "anchor": "从连续章群决定怎样改"
     },
     {
       "id": "two-pass",
       "name": "两遍审查",
       "aliases": ["两遍", "事实遍", "体验遍"],
-      "one_line": "先查事实，再另读完整交流与人物行为；不能互相抵消。",
+      "one_line": "先复读文学收益，再连读跨章因果与节奏；发现问题即返工。",
       "when": "每章交付前。",
       "file": "references/event-progression.md",
       "anchor": "交付前分两次审查"
@@ -238,8 +241,8 @@
       "aliases": ["引文", "已检查", "自审"],
       "one_line": "没有引用正文原句的自审按未完成处理。",
       "when": "自审只有“已检查/已修复/无问题”。",
-      "file": "references/event-progression.md",
-      "anchor": "第二遍对话与人物行为"
+      "file": "references/writing-brief.md",
+      "anchor": "写后四道门每道门必须引用原句"
     },
     {
       "id": "dialogue-seven",
@@ -248,7 +251,7 @@
       "one_line": "声口、接招、关系作用、非动作补丁、不替作者解释、情绪不整齐、事实未改。",
       "when": "完整对手戏写后。",
       "file": "references/dialogue.md",
-      "anchor": "第二次审查完整对话与人物行为"
+      "anchor": "完整对话与人物行为"
     },
     {
       "id": "mechanical-dialogue",
@@ -348,6 +351,33 @@
       "when": "润色或表达审阅。",
       "file": "references/novel-humanizer.md",
       "anchor": null
+    },
+    {
+      "id": "scene-value",
+      "name": "章群场景取舍",
+      "aliases": ["重复调查", "重复核对", "路线复述", "总结会", "保护日常", "日常闲聊", "整场重构"],
+      "one_line": "先删并重复功能，留下独立生活体验；必要场景只剩步骤就整场重构。",
+      "when": "多章换人重复核验，或想删掉不推进调查的饭桌闲聊。",
+      "file": "references/six-dimension-quality.md",
+      "anchor": "按阅读体验取舍场景"
+    },
+    {
+      "id": "causal-ellipsis",
+      "name": "逻辑留白",
+      "aliases": ["手续", "医院手续", "逻辑自证", "合理留白", "行动可行性", "逻辑展示"],
+      "one_line": "在幕后核实关键条件，正文只呈现理解重大选择与结果所需的部分。",
+      "when": "准备逐项解释救援手续、文件交接或角色如何证明一个已知结论。",
+      "file": "references/six-dimension-quality.md",
+      "anchor": "逻辑留白与关键因果"
+    },
+    {
+      "id": "batch-acceptance",
+      "name": "章群验收",
+      "aliases": ["真实Diff", "真实 Diff", "逐章报告", "累计正文", "章群报告", "跨章复读"],
+      "one_line": "按两次复读与章群三问返工，交最新累计正文、实改章、逐章和章群报告、实际差异。",
+      "when": "综合精修准备收束，或单章分别合格但连读疲劳。",
+      "file": "references/six-dimension-quality.md",
+      "anchor": "两次复读与章群交付"
     }
   ]
 }

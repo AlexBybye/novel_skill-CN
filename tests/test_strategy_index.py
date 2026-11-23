@@ -65,6 +65,25 @@ class FindStrategyTests(unittest.TestCase):
             cwd=str(ROOT), capture_output=True, text=True, encoding="utf-8",
         )
 
+    def test_literary_routes_and_dialogue_scope(self):
+        standard = MANIFEST["entrypoints"]["quality"]
+        for task in ("write_chapter", "revise_chapter", "revise_batch", "review_batch", "diagnose"):
+            with self.subTest(task=task):
+                self.assertIn(standard, MANIFEST["read_order"][task])
+                for target in MANIFEST["read_order"][task]:
+                    self.assertTrue((ROOT / target).is_file(), target)
+        self.assertEqual(MANIFEST["read_order"]["dialogue_only"][0],
+                         "references/dialogue-only/SKILL.md")
+
+    def test_find_quality_strategy_by_editorial_problem(self):
+        for query, expected in (("重复调查", "scene-value"), ("保护日常", "scene-value"),
+                                ("医院手续", "causal-ellipsis"), ("关系归零", "six-dim"),
+                                ("环境与审美沉浸", "six-dim"), ("真实Diff", "batch-acceptance")):
+            with self.subTest(query=query):
+                result = self.run_finder(query, "--json", "--limit", "1")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual([item["id"] for item in json.loads(result.stdout)], [expected])
+
     def test_check_passes(self):
         result = self.run_finder("--check")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
