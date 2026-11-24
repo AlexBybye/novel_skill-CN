@@ -1,5 +1,7 @@
 # 执行指令（修订版）：《没有人应该出生》人物对白全面重修
 
+> 这是已有作品的专项执行示例，仅适用于该项目相应授权与版本；其他小说不要加载其中人物或情节为事实。
+
 请将本次任务识别为**把小说中不自然的对白改成真实的人会说的话**。人物不是在发表观点、核对事实、执行流程或概括主题，而是在和另一个具体的人交流。
 
 严格遵照 `novel-dialogue-humanize-zh/SKILL.md`，**首先读取 `references/editorial-calibration.md`**（含防误改三规则、交流主体与情绪连续性检查、作者撤销样本库），再按 `references/batch-protocol.md` 完成全量任务；具体病灶辨认查 `references/diagnostics.md`。`novel-coauthor-zh` 是背景 Skill，不得使用它的结构性改写功能扩张本轮权限。

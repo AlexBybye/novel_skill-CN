@@ -1,22 +1,26 @@
 {
   "name": "novel-coauthor-zh",
-  "version": "3.0.0",
-  "updated": "2026-11-23",
+  "version": "3.1.0",
+  "updated": "2026-11-24",
   "entrypoints": {
     "quickstart": "START-HERE.md",
     "skill": "SKILL.md",
     "index": "references/strategy-index.md",
     "cards": "references/strategy-cards.md",
-    "quality": "references/six-dimension-quality.md"
+    "quality": "references/six-dimension-quality.md",
+    "vitality": "references/character-vitality.md"
   },
   "read_order": {
-    "write_chapter": ["START-HERE.md", "references/six-dimension-quality.md", "references/writing-brief.md", "references/chapter-shape.md"],
-    "revise_chapter": ["START-HERE.md", "references/six-dimension-quality.md", "references/scene-revision.md", "references/writing-brief.md"],
+    "write_chapter": ["references/six-dimension-quality.md", "references/two-pass-workflow.md", "references/writing-brief.md"],
+    "revise_chapter": ["references/six-dimension-quality.md", "references/scene-revision.md", "references/writing-brief.md"],
     "dialogue_only": ["references/dialogue-only/SKILL.md"],
     "diagnose": ["references/six-dimension-quality.md", "references/strategy-index.md"],
     "continuity": ["references/memory.md"],
-    "revise_batch": ["START-HERE.md", "references/six-dimension-quality.md", "references/revision-batches.md", "references/scene-revision.md"],
-    "review_batch": ["references/six-dimension-quality.md", "references/revision-batches.md"]
+    "revise_batch": ["references/six-dimension-quality.md", "references/revision-batches.md", "references/scene-revision.md"],
+    "review_batch": ["references/six-dimension-quality.md", "references/revision-batches.md"],
+    "longitudinal": ["references/six-dimension-quality.md", "references/character-vitality.md", "references/revision-batches.md"],
+    "plan": ["references/collaboration.md", "references/character-design.md"],
+    "evaluate": ["references/six-dimension-quality.md", "tests/behavior-cases.md"]
   },
   "strategies": [
     {
@@ -220,7 +224,7 @@
     {
       "id": "six-dim",
       "name": "六维",
-      "aliases": ["六维", "心理", "情感钩子", "沉浸", "三层六维", "V3.0", "审批标准", "章群三问", "关系归零", "关系循环", "心理持续叙事", "对白生命力", "情感牵挂与追读动力", "人物可视形象", "环境与审美沉浸", "章群节奏与因果", "风景", "审美", "身体连续性"],
+      "aliases": ["六维", "心理", "情感钩子", "沉浸", "三层六维", "V3.0", "审批标准", "章群三问", "关系归零", "关系循环", "心理持续叙事", "对白生命力", "情感牵挂与追读动力", "人物可视形象", "环境与审美沉浸", "章群节奏与因果", "风景", "审美", "身体连续性", "V3.1"],
       "one_line": "三层看结构、人物、文学；六维共同验收，章群三问分别取证。",
       "when": "续写、综合精修与文学验收，动笔或审读前。",
       "file": "references/six-dimension-quality.md",
@@ -378,6 +382,51 @@
       "when": "综合精修准备收束，或单章分别合格但连读疲劳。",
       "file": "references/six-dimension-quality.md",
       "anchor": "两次复读与章群交付"
+    },
+    {
+      "id": "independent-intent",
+      "name": "人物独立推演",
+      "aliases": ["大纲不合理", "自主选择", "人物私心"],
+      "one_line": "先从人物本人推演，再选择符合锁定结果的实现路径。",
+      "when": "关键选择、人物像在执行大纲。",
+      "file": "references/character-vitality.md",
+      "anchor": "独立推演不是替人物讲道理"
+    },
+    {
+      "id": "emotion-sufficiency",
+      "name": "情感充分性",
+      "aliases": ["过度克制", "非理性", "不完美行为", "情感不足"],
+      "one_line": "比较关系积累与触发、行动、余波；情绪与修复不必同步。",
+      "when": "好友赴险、失落或喜悦反应不足。",
+      "file": "references/character-vitality.md",
+      "anchor": "情感充分性与不完美行为"
+    },
+    {
+      "id": "voice-drift",
+      "name": "表达习惯连续性",
+      "aliases": ["寡言", "表达习惯漂移", "心理对白", "话越来越多"],
+      "one_line": "对照可比关系阶段，区分声口漂移与有依据的亲密变化。",
+      "when": "长期人物声音趋同或寡言者突然健谈。",
+      "file": "references/character-vitality.md",
+      "anchor": "表达习惯的纵向校准"
+    },
+    {
+      "id": "missing-scene",
+      "name": "主动发现缺失场景",
+      "aliases": ["缺失场景", "遗漏反应", "反向审读"],
+      "one_line": "从既有积累推演可能反应，回查实际场景与后文，区分缺失和留白。",
+      "when": "原稿行为合理，却没有写出应有的情感与行动。",
+      "file": "references/character-vitality.md",
+      "anchor": "主动发现缺失场景"
+    },
+    {
+      "id": "dual-causality",
+      "name": "双轨因果",
+      "aliases": ["情感因果", "双轨因果", "章群重构"],
+      "one_line": "事件行动与情感关系分别追踪，必要时重组章群。",
+      "when": "选择后续行动或情绪归零，局部修法无效。",
+      "file": "references/character-vitality.md",
+      "anchor": "双轨因果和章群重构"
     }
   ]
 }

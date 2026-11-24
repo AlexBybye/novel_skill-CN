@@ -84,6 +84,31 @@ class FindStrategyTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual([item["id"] for item in json.loads(result.stdout)], [expected])
 
+    def test_vitality_routes_and_narrow_scope(self):
+        core = MANIFEST["entrypoints"]["quality"]
+        for task in ("write_chapter", "revise_chapter", "revise_batch", "review_batch", "longitudinal", "diagnose"):
+            with self.subTest(task=task):
+                self.assertIn(core, MANIFEST["read_order"][task])
+        self.assertEqual(MANIFEST["read_order"]["dialogue_only"], ["references/dialogue-only/SKILL.md"])
+        self.assertIn(MANIFEST["entrypoints"]["vitality"], MANIFEST["read_order"]["longitudinal"])
+        self.assertNotIn("tests/behavior-cases.md", MANIFEST["read_order"]["write_chapter"])
+        for task, paths in MANIFEST["read_order"].items():
+            with self.subTest(task=task):
+                self.assertEqual(len(paths), len(set(paths)))
+                for target in paths:
+                    self.assertTrue((ROOT / target).is_file(), target)
+
+    def test_find_vitality_strategies(self):
+        for query, expected in (("大纲不合理", "independent-intent"),
+                                ("过度克制", "emotion-sufficiency"),
+                                ("寡言", "voice-drift"),
+                                ("缺失场景", "missing-scene"),
+                                ("情感因果", "dual-causality")):
+            with self.subTest(query=query):
+                result = self.run_finder(query, "--json", "--limit", "1")
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual([item["id"] for item in json.loads(result.stdout)], [expected])
+
     def test_check_passes(self):
         result = self.run_finder("--check")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
